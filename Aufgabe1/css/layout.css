@@ -22,6 +22,7 @@ nav {
     top: 0;
 }
 
+.navli {
     float: left;
 	padding: 30px;
 	kbackground-color: #990000;
