@@ -164,7 +164,21 @@ footer{
 	padding-top: 15px;
 	margin-bottom: 10px;
 	border-top: 1px solid #9ac334;
+}
+
+#footerleft {
+	float: left;
+	width: 40 vw;
+	text-align: left;
+}
+
+#footerright {
+	width: 40 vw;
 	text-align: right;
+}
+
+b {
+	font-weight: bold;
 }
 
 #up{
@@ -193,6 +207,9 @@ footer{
 	#column6{
 		display:none;
 	}
+	#footerleft {
+		display:none;
+	}
 }
 
 
@@ -216,7 +233,6 @@ footer{
 		color: red;
 	}
 	#flowing_text{
-		column-count: 1
 	}
 	.column4{
 		display:none;
