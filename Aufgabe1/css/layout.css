@@ -36,7 +36,7 @@ body{
 .navli:hover {
     background-color: #c1c1c1;
 	color: black;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 #leftlist {
@@ -106,8 +106,8 @@ td{
 tr:nth-child(even) {background-color: #d8d8d8;}
 
 .hide_bar{
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	list-style-type: none;
 	overflow: hidden;
 }
@@ -116,7 +116,8 @@ tr:nth-child(even) {background-color: #d8d8d8;}
 	border-right: 2px solid #c1c1c1;
 	color: #c1c1c1;
 	float: left;
-	padding: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 #hide_bar_1st{
 	color: #545454;
@@ -125,4 +126,12 @@ tr:nth-child(even) {background-color: #d8d8d8;}
 }
 #hide_bar_last{
 	border-right: none;
+}
+
+footer{
+	margin-top: 70px;
+	padding-top: 15px;
+	margin-bottom: 10px;
+	border-top: 1px solid #85bc58;
+	text-align: right;
 }
