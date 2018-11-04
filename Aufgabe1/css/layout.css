@@ -22,7 +22,6 @@ nav {
     top: 0;
 }
 
-li {
     float: left;
 	padding: 30px;
 	kbackground-color: #990000;
@@ -30,7 +29,7 @@ li {
 
 }
 
-li a {
+.navli a {
 	padding-top: 10px;
 	color: #494949;
 }
@@ -49,7 +48,7 @@ li a {
     text-decoration: none;
 }*/
 
-li:hover {
+.navli:hover {
     background-color: #c1c1c1;
 	color: black;
 }
@@ -74,7 +73,6 @@ h1 {
 	margin-top: 40px;
 	font-size: 50px;
 }
-/* https://www.w3schools.com/html/html_tables.asp */
 
 #page{
 	width: 90%;
@@ -87,7 +85,7 @@ h1 {
 	padding: 10px;
 	border:1px solid black;
 	border-radius: 0px 0px 5px 5px; 
-	border-color: #c1c1c1;
+	border-color: #d8d8d8;
 	border-top-color: #85bc58;
 	box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);	
 }
@@ -100,4 +98,29 @@ h1 {
 }
 #wiki_link:hover {
     color: green;
+}
+
+table{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+thead{
+	text-align: left;
+}
+
+td{
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+tr:nth-child(even) {background-color: #d8d8d8;}
+
+.hide_bar{
+	list-style-type: none;
+	overflow: hidden;
+}
+.hide_bar li{
+	float: left;
+	padding: 10px;
 }
