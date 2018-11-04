@@ -66,12 +66,13 @@ h1 {
 }
 
 #page{
-	width: 90%;
-	margin-left: 5%;
-	margin-right: 5%;
+	width: 90vw;
+	margin-left: 5vw;
+	margin-right: 5vw;
 }
 
 #flowing_text{
+	margin-top: 15px;
 	column-count: 3;
 	padding: 10px;
 	border:1px solid black;
@@ -95,23 +96,33 @@ table{
 	border-collapse: collapse;
 	width: 100%;
 }
-
 thead{
 	text-align: left;
 }
-
 td{
 	padding-top: 8px;
 	padding-bottom: 8px;
 }
-
 tr:nth-child(even) {background-color: #d8d8d8;}
 
 .hide_bar{
+	margin-top: 15px;
+	margin-bottom: 15px;
 	list-style-type: none;
 	overflow: hidden;
 }
 .hide_bar li{
+	font-size: 12px;
+	border-right: 2px solid #c1c1c1;
+	color: #c1c1c1;
 	float: left;
-	padding: 10px;
+	padding: 5px;
+}
+#hide_bar_1st{
+	color: #545454;
+	border-right: none;
+	padding-left: 0px;
+}
+#hide_bar_last{
+	border-right: none;
 }
