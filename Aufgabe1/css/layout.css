@@ -7,60 +7,67 @@ body{
 #main_menu{ /* https://www.w3schools.com/html/tryit.asp?filename=tryhtml_lists_menu */
 	list-style-type: none;
     overflow: hidden;
-	border-right: 1px solid #c1c1c1;
 }
 
 #header{
 	height: 80px;
-	width: 100%;
+	width: 100vw;
 	background-image: linear-gradient(to bottom, #cccccc, white);
 	border-bottom: 1px solid #c1c1c1;
 }
 
 nav {
-    position: sticky;
-    top: 0;
-}
-
-li {
-    float: left;
-	padding: 30px;
-	kbackground-color: #990000;
-	border-left: 1px solid #c1c1c1;
 
 }
 
-li a {
-	padding-top: 10px;
-	color: #494949;
+a {
+	color: #000000;
 }
 
 /*li {
     float: left;
-    color: #494949;
-    text-align: center;
-    text-decoration: none;
+	padding: 30px;
+	lbackground-color: #990000;
+	border-left: 1px solid #c1c1c1;
+
 }*/
 
 /*li a {
+	padding-top: 10px;
+	color: #494949;
+}*/
+
+li {
+    float: left;
+    color: #494949;
+    text-align: center;
+    text-decoration: none;
+	border-right: 1px solid #c1c1c1;
+}
+
+li a {
 	display: block;
     text-align: center;
-    padding: 30px;
+    padding: 40px 30px 20px 30px;
     text-decoration: none;
-}*/
+}
 
 li:hover {
     background-color: #c1c1c1;
 	color: black;
 }
 
+#leftlist {
+	border-left: 1px solid #c1c1c1;
+}
+
 #logo{
-	margin-left: 30px;
+	margin-left: 40px;
+	margin-right: 40px;
 	float: left; 
 	width: 150px;
 	height: 80px;
-	background: url(../res/world_data_logo_v2.png)
-
+	background: url(../res/world_data_logo_v2.png);
 }
 
 #logo:hover{
