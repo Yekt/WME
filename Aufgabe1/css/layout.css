@@ -78,11 +78,13 @@ body{
 
 h1 {
 	margin-top: 40px;
-	font-size: 47px;
+	font-size: 45px;
 	font-weight: lighter;
 }
 
 #page{
+	/* 1170px container was not used on purpose.
+	We thought this approach would be more fitting for a responsive Website. */
 	width: 86vw;
 	margin-left: 6vw;
 	margin-right: 8vw;
@@ -95,15 +97,15 @@ h1 {
 	border:1px solid black;
 	border-radius: 0px 0px 5px 5px; 
 	border-color: #d8d8d8;
-	border-top-color: #85bc58;
+	border-top-color: #9ac334;
 	box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);	
 }
 
 #wiki_link:link {
-    color: #85bc58;
+    color: #9ac334;
 }
 #wiki_link:visited {
-    color: #85bc58;
+    color: #9ac334;
 }
 #wiki_link:hover {
     color: green;
@@ -155,6 +157,13 @@ footer{
 	margin-top: 70px;
 	padding-top: 15px;
 	margin-bottom: 10px;
-	border-top: 1px solid #85bc58;
+	border-top: 1px solid #9ac334;
 	text-align: right;
+}
+
+#up{
+	color: #9ac334;
+}
+#down{
+	color: #9ac334;
 }
