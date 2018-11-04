@@ -186,6 +186,13 @@ footer{
 	#flowing_text{
 		column-count: 2
 	}
+	
+	.column6{
+		display:none;
+	}
+	#column6{
+		display:none;
+	}
 }
 
 
@@ -195,5 +202,26 @@ footer{
 	}
 	#flowing_text{
 		column-count: 1
+	}
+	.column5{
+		display:none;
+	}
+	#column5{
+		display:none;
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	h1{
+		color: red;
+	}
+	#flowing_text{
+		column-count: 1
+	}
+	.column4{
+		display:none;
+	}
+	#column4{
+		display:none;
 	}
 }
