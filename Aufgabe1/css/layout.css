@@ -1,7 +1,9 @@
 body{
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
+	font-weight: normal;
 	line-height: 1.45;
+	background: white;
 }
 
 #main_menu{ /* https://www.w3schools.com/html/tryit.asp?filename=tryhtml_lists_menu */
@@ -31,47 +33,27 @@ body{
   padding-top: 80px;
 }
 
-nav {
-
-}
-
-a {
-	color: #000000;
-}
-
-/*li {
-    float: left;
-	padding: 30px;
-	lbackground-color: #990000;
-	border-left: 1px solid #c1c1c1;
-
-}*/
-
-/*li a {
-	padding-top: 10px;
-	color: #494949;
-}*/
-
-li {
-    float: left;
-    color: #494949;
-    text-align: center;
-    text-decoration: none;
-	border-right: 1px solid #c1c1c1;
-	transition: 0.3s;
-}
-
-li a {
+.navli a {
+	color: black;
 	display: block;
     text-align: center;
     padding: 40px 15px 20px;
     text-decoration: none;
 }
 
-li:hover {
+.navli {
+    float: left;
+    color: #494949;
+    text-align: center;
+    text-decoration: none;
+	border-right: 1px solid #c1c1c1;
+	transition: 0.5s;
+}
+
+.navli:hover {
     background-color: #c1c1c1;
 	color: black;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 #leftlist {
@@ -97,21 +79,22 @@ li:hover {
 h1 {
 	margin-top: 40px;
 	font-size: 50px;
+	font-weight: light;
 }
-/* https://www.w3schools.com/html/html_tables.asp */
 
 #page{
-	width: 90%;
-	margin-left: 5%;
-	margin-right: 5%;
+	width: 90vw;
+	margin-left: 5vw;
+	margin-right: 5vw;
 }
 
 #flowing_text{
+	margin-top: 15px;
 	column-count: 3;
 	padding: 10px;
 	border:1px solid black;
 	border-radius: 0px 0px 5px 5px; 
-	border-color: #c1c1c1;
+	border-color: #d8d8d8;
 	border-top-color: #85bc58;
 	box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);	
 }
@@ -124,4 +107,54 @@ h1 {
 }
 #wiki_link:hover {
     color: green;
+}
+
+table{
+	border-collapse: collapse;
+	width: 100%;
+}
+thead{
+	text-align: left;
+	border-bottom: 3px solid #c1c1c1;
+}
+th{
+	font-size: 16px;
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+td{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+tr:nth-child(even) {background-color: #d8d8d8;}
+
+.hide_bar{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	list-style-type: none;
+	overflow: hidden;
+}
+.hide_bar li{
+	font-size: 12px;
+	border-right: 2px solid #c1c1c1;
+	color: #c1c1c1;
+	float: left;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#hide_bar_1st{
+	color: #545454;
+	border-right: none;
+	padding-left: 0px;
+}
+#hide_bar_last{
+	border-right: none;
+}
+
+footer{
+	margin-top: 70px;
+	padding-top: 15px;
+	margin-bottom: 10px;
+	border-top: 1px solid #85bc58;
+	text-align: right;
 }
