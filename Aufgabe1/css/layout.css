@@ -14,7 +14,7 @@ body{
 #header{
 	height: 80px;
 	width: 100vw;
-	background-image: linear-gradient(to bottom, #cccccc, white);
+	background-image: linear-gradient(to bottom, #d1d1d1, #eeeeee);
 	border-bottom: 1px solid #c1c1c1;
 	overflow: hidden;
 }
@@ -51,7 +51,7 @@ body{
 }
 
 .navli:hover {
-    background-color: #c1c1c1;
+    background-color: #cccccc;
 	color: black;
 	text-decoration: none;
 }
