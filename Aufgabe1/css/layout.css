@@ -61,8 +61,8 @@ body{
 }
 
 #logo{
-	margin-left: 100px;
-	margin-right: 100px;
+	margin-left: 115px;
+	margin-right: 60px;
 	float: left; 
 	width: 150px;
 	height: 80px;
@@ -78,14 +78,14 @@ body{
 
 h1 {
 	margin-top: 40px;
-	font-size: 50px;
+	font-size: 47px;
 	font-weight: lighter;
 }
 
 #page{
-	width: 90vw;
-	margin-left: 4vw;
-	margin-right: 6vw;
+	width: 86vw;
+	margin-left: 6vw;
+	margin-right: 8vw;
 }
 
 #flowing_text{
