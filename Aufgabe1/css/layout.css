@@ -1,3 +1,4 @@
+
 body{
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
@@ -141,13 +142,17 @@ tr:nth-child(even) {background-color: #d8d8d8;}
 	list-style-type: none;
 	overflow: hidden;
 }
-.hide_bar li{
+.hide_bar li {
 	font-size: 12px;
 	border-right: 2px solid #c1c1c1;
 	color: #c1c1c1;
 	float: left;
 	padding-left: 5px;
 	padding-right: 5px;
+}
+.hide_bar li a{
+	color: #c1c1c1;
+	text-decoration: none;
 }
 #hide_bar_1st{
 	color: #545454;
