@@ -11,7 +11,7 @@ Desweiteren dient der Ordner res, um alle zur Verfügung gestellten Materilien z
 
 ## Anmerkungen
 * In der Aufgabenstellung stand, man solle einen 1170px großen container für den Inhalt der Website benutzen. Wir haben uns bewusst dagegen entschieden, da wir es angenehmer fanden, wenn die Seite schon vor der 1200px Grenze mit der größe des Bildschirms skaliert. 
-* Für die Implementierung der sticky Navbar haben wir zwei verschiedene Ansätze. Nach dem wir uns an einer Umsetzung mit JavaScript versucht haben, ist uns klar geworden, dass das absolut nicht notwendig ist, wenn man keinen über der Navbar braucht. 
+* Für die Implementierung der sticky Navbar haben wir zwei verschiedene Ansätze. Nach dem wir uns an einer Umsetzung mit JavaScript versucht haben, ist uns klar geworden, dass das absolut nicht notwendig ist, wenn man keinen über der Navbar braucht. Alternativ ist die Lösung mit JavaScript trotzdem auskommentiert im Code vorhanden.
 * Verwendete Quellen sind an den passenden Stellen im Quelltext kommentiert. 
 * Alle CSS Validatoren die wir finden konnten (inklusive den in der Folie verlinkten), haben unsere Datei nicht entgegen genommen. Allerdings galt das gleiche auch für die bereitgestellte reset.css Datei.
 
