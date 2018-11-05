@@ -181,14 +181,21 @@ b {
 	font-weight: bold;
 }
 
-#up{
-	color: #9ac334;
-}
-#down{
+#up {
 	color: #9ac334;
 }
 
+#down {
+	color: #9ac334;
+}
 
+#up:active{
+	color: green;
+}
+
+#down:active{
+	color: green;
+}
 
 @media only screen and (max-width: 1200px) {
 	#page{
