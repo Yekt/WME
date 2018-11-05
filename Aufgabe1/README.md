@@ -1,25 +1,25 @@
 # WME Aufgabe 1
 
 ## Gruppe 18
-Jean-Luc Rudow
+Jean-Luc Rudow 
 Lukas Sauter
 
 ## Dateien und Ordner
-Wir haben für diese Aufgabe hauptsächlich drei Dokumente geschrieben. Jeweils eine Datei für HTML, CSS und JavaScript.
-Diese liegen in jeweils abgetrennten Ordnern (html, css und js).
-Desweiteren dient der Ordner res, um alle zur Verfügung gestellten Materilien zu halten.
+Wir haben fÃ¼r diese Aufgabe hauptsÃ¤chlich drei Dokumente geschrieben. Jeweils eine Datei fÃ¼r HTML, CSS und JavaScript. 
+Diese liegen in jeweils abgetrennten Ordnern (html, css und js). 
+Desweiteren dient der Ordner res, um alle zur VerfÃ¼gung gestellten Materilien zu halten. 
 
 ## Anmerkungen
-* In der Aufgabenstellung stand, man solle einen 1170px großen container für den Inhalt der Website benutzen. Wir haben uns bewusst dagegen entschieden, da wir es angenehmer fanden, wenn die Seite schon vor der 1200px Grenze mit der größe des Bildschirms skaliert.
-* Für die Implementierung der sticky nav bar haben wir zwei verschiedene Ansätze. Nach dem wir uns an einer Umsetzung mit JavaScript versucht haben, ist uns klar geworden, dass das absolut nicht notwendig ist, wenn man wie wir keinen Text nüber der Nav bar braucht.
-* Verwendete Quellen sind an den passenden Stellen im Quelltext kommentiert.
+* In der Aufgabenstellung stand, man solle einen 1170px groÃŸen container fÃ¼r den Inhalt der Website benutzen. Wir haben uns bewusst dagegen entschieden, da wir es angenehmer fanden, wenn die Seite schon vor der 1200px Grenze mit der grÃ¶ÃŸe des Bildschirms skaliert. 
+* FÃ¼r die Implementierung der sticky nav bar haben wir zwei verschiedene AnsÃ¤tze. Nach dem wir uns an einer Umsetzung mit JavaScript versucht haben, ist uns klar geworden, dass das absolut nicht notwendig ist, wenn man wie wir keinen Text nÃ¼ber der Nav bar braucht. 
+* Verwendete Quellen sind an den passenden Stellen im Quelltext kommentiert. 
 
 ## Quellen und Resourcen
-[Roboto](https://fonts.googleapis.com/css?family=Roboto)
-[Font Awsome](https://use.fontawesome.com/releases/v5.4.1/css/all.css)
-[TU Dresden](https://mt.inf.tu-dresden.de/study/teaching/ws_18-19/wme_18-19/ueb-wme_18-19/)
-[w3schools - Navigation](https://www.w3schools.com/html/tryit.asp?filename=tryhtml_lists_menu)
-[Wikipedia](https://en.wikipedia.org/wiki/Plain_text)
-[Convertio](https://convertio.co/de/csv-html/)
-[w3schools - sticky nav js](https://www.w3schools.com/howto/howto_js_sticky_header.asp)
-[w3schools - table sort js](https://www.w3schools.com/howto/howto_js_sort_table.asp)
+[Roboto](https://fonts.googleapis.com/css?family=Roboto) 
+[Font Awsome](https://use.fontawesome.com/releases/v5.4.1/css/all.css) 
+[TU Dresden](https://mt.inf.tu-dresden.de/study/teaching/ws_18-19/wme_18-19/ueb-wme_18-19/) 
+[w3schools - Navigation](https://www.w3schools.com/html/tryit.asp?filename=tryhtml_lists_menu) 
+[Wikipedia](https://en.wikipedia.org/wiki/Plain_text) 
+[Convertio](https://convertio.co/de/csv-html/) 
+[w3schools - sticky nav js](https://www.w3schools.com/howto/howto_js_sticky_header.asp) 
+[w3schools - table sort js](https://www.w3schools.com/howto/howto_js_sort_table.asp) 
