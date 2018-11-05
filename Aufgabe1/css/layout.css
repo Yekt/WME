@@ -162,12 +162,12 @@ tr:nth-child(even) {background-color: #d8d8d8;}
 	color: #777777;
 	text-decoration: none;
 }
-#hide_bar_1st{
+.hide_bar .hide_bar_1st{
 	color: #545454;
 	border-right: none;
 	padding-left: 0px;
 }
-#hide_bar_last{
+.hide_bar .hide_bar_last{
 	border-right: none;
 }
 
