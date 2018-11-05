@@ -22,7 +22,6 @@ var c4 = true;
 var c5 = true;
 var c6 = true;
 
-
 function hideColumn2() {
 	var column = document.getElementsByClassName("column2");
 	var head = document.getElementById("column2");
@@ -97,7 +96,6 @@ function hideColumn6() {
 		c6 = true;
 	}
 }
-	
 	
 /*https://www.w3schools.com/howto/howto_js_sort_table.asp*/
 function sortTableup() {
