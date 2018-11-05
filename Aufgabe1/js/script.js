@@ -96,6 +96,7 @@ function hideColumn6() {
 		head.classList.remove("hidden");
 		c2 = true;
 	}
+}
 	
 	
 /*https://www.w3schools.com/howto/howto_js_sort_table.asp*/
