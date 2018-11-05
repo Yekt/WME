@@ -41,60 +41,60 @@ function hideColumn2() {
 function hideColumn3() {
     var column = document.getElementsByClassName("column3");
 	var head = document.getElementById("column3");
-    if(c2){
+    if(c3){
 		column.classList.add("hidden");
 		head.classList.add("hidden");
-		c2 = false;
+		c3 = false;
 	}
 	else{
 		column.classList.remove("hidden");
 		head.classList.remove("hidden");
-		c2 = true;
+		c3 = true;
 	}
 }
 
 function hideColumn4() {
     var column = document.getElementsByClassName("column4");
 	var head = document.getElementById("column4");
-    if(c2){
+    if(c4){
 		column.classList.add("hidden");
 		head.classList.add("hidden");
-		c2 = false;
+		c4 = false;
 	}
 	else{
 		column.classList.remove("hidden");
 		head.classList.remove("hidden");
-		c2 = true;
+		c4 = true;
 	}
 }
 
 function hideColumn5() {
     var column = document.getElementsByClassName("column5");
 	var head = document.getElementById("column5");
-    if(c2){
+    if(c5){
 		column.classList.add("hidden");
 		head.classList.add("hidden");
-		c2 = false;
+		c5 = false;
 	}
 	else{
 		column.classList.remove("hidden");
 		head.classList.remove("hidden");
-		c2 = true;
+		c5 = true;
 	}
 }
 
 function hideColumn6() {
     var column = document.getElementsByClassName("column6");
 	var head = document.getElementById("column6");
-    if(c2){
+    if(c6){
 		column.classList.add("hidden");
 		head.classList.add("hidden");
-		c2 = false;
+		c6 = false;
 	}
 	else{
 		column.classList.remove("hidden");
 		head.classList.remove("hidden");
-		c2 = true;
+		c6 = true;
 	}
 }
 	
