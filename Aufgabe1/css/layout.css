@@ -1,4 +1,3 @@
-
 body{
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
@@ -184,17 +183,18 @@ b {
 #up {
 	color: #9ac334;
 }
-
 #down {
 	color: #9ac334;
 }
-
 #up:active{
 	color: green;
 }
-
 #down:active{
 	color: green;
+}
+
+.hidden{
+	display: none;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -236,11 +236,6 @@ b {
 }
 
 @media only screen and (max-width: 320px) {
-	h1{
-		color: red;
-	}
-	#flowing_text{
-	}
 	.column4{
 		display:none;
 	}
