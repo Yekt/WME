@@ -152,6 +152,14 @@ tr:nth-child(even) {background-color: #d8d8d8;}
 }
 .hide_bar li a{
 	color: #c1c1c1;
+	text-decoration: underline;
+}
+.hide_bar li a:hover{
+	color: #c1c1c1;
+	text-decoration: none;
+}
+.hide_bar li a:active{
+	color: #777777;
 	text-decoration: none;
 }
 #hide_bar_1st{
