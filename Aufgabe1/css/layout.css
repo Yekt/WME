@@ -21,8 +21,8 @@ nav {
 }
 
 /*
-Javascriptvariante für Stickynavigation. 
-Wirft kleine scrollfehler auf, ist aber nicht notwendig, da über der Navbar kein Content mehr besteht.
+Javascriptsoluition for sticky navigation. 
+We couldnt fix the jumps on first scrolls and decided not to use it, because the "postion: fixed;" in nav does the job fine as long as their is no content above the navbar. 
 
 .content { 
   padding-top: 40px;
@@ -181,18 +181,22 @@ b {
 	font-weight: bold;
 }
 
-#up{
+#up {
 	color: #9ac334;
 }
-#down{
+#down {
 	color: #9ac334;
 }
-
+#up:active{
+	color: green;
+}
+#down:active{
+	color: green;
+}
 
 .hidden{
 	display: none;
 }
-
 
 @media only screen and (max-width: 1200px) {
 	#page{
