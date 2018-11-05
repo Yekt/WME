@@ -92,8 +92,7 @@ h1 {
 	We thought this approach would be more fitting for a responsive Website. */
 	padding-top: 120px;
 	width: 86vw;
-	margin-left: 6vw;
-	margin-right: 8vw;
+	margin: auto;
 }
 
 #flowing_text{
@@ -211,10 +210,16 @@ b {
 }
 
 @media only screen and (max-width: 1200px) {
+	#logo{
+		margin-left: 0px;
+	}
+	
+	h1{
+		font-size: 40px;
+	}
+	
 	#page{
 		width: 100vw;
-		margin-left: 0vw;
-		margin-right: 0vw;
 	}
 	
 	#flowing_text{
@@ -235,7 +240,7 @@ b {
 
 @media only screen and (max-width: 768px) {
 	h1{
-		font-size: 40px;
+		font-size: 30px;
 	}
 	#flowing_text{
 		column-count: 1
