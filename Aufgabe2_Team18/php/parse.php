@@ -1,6 +1,10 @@
 <?php 
 	include ("world_data_parser.php");
 	
-	$parse = WorldDataParser::parseCSV();
-	echo(parse);
+	$wdp = new WorlDataParser();
+	
+	$resultArray = $wdp::parseCSV("../res/world_data_v1.csv"); // TODO? 
+	echo '<pre>';
+	print_r($resultArray);
+	echo '</pre>';
 ?>

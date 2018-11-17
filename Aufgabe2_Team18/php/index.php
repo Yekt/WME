@@ -15,14 +15,14 @@
 	<body>
 		<header>
 			<nav id='header'>
-				<a href="index.html"><div id="logo"></div></a>
+				<a href="index.php"><div id="logo"></div></a>
 				<ul id='main_menu'>
-					<li class='navli' id='leftlist'><a href="index.html"><i class="fas fa-list-ul"></i> A1 - Table</a></li>
-					<li class='navli'><a href="index.html"><i class="fas fa-list-ul"></i> A2 - Parse</a></li>
-					<li class='navli'><a href="index.html"><i class="fas fa-list-ul"></i> A2 - Save</a></li>
-					<li class='navli'><a href="index.html"><i class="fas fa-list-ul"></i> A2 - Print</a></li>
-					<li class='navli'><a href="index.html"><i class="fas fa-list-ul"></i> A3 - REST</a></li>
-					<li class='navli'><a href="index.html"><i class="fas fa-list-ul"></i> A4 - Vis</a></li>	
+					<li class='navli' id='leftlist'><a href="index.php"><i class="fas fa-list-ul"></i> A1 - Table</a></li>
+					<li class='navli'><a href="parse.php"><i class="fas fa-list-ul"></i> A2 - Parse</a></li>
+					<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A2 - Save</a></li>
+					<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A2 - Print</a></li>
+					<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A3 - REST</a></li>
+					<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A4 - Vis</a></li>	
 				</ul>
 			</nav>
 		</header>
@@ -63,7 +63,6 @@
 					</tr>
 				</thead>
 				<tbody>
-				<!-- coversion using https://convertio.co/de/csv-html/ -->
 				  <tr class="row1">
 					<td class="column0">001</td>
 					<td class="column1">Brazil              </td>
