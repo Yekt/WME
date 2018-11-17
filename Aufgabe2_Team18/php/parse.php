@@ -3,8 +3,8 @@
 	
 	$wdp = new WorlDataParser();
 	
-	$resultArray = $wdp::parseCSV("../res/world_data_v1.csv"); // TODO? 
+	$parseResult = $wdp::parseCSV("../res/world_data_v1.csv"); // TODO? 
 	echo '<pre>';
-	print_r($resultArray);
+	print_r($parseResult);
 	echo '</pre>';
 ?>
