@@ -3,5 +3,6 @@
 	
 	$parse = WorldDataParser::parseCSV();
 	$save = WorldDataParser::saveXML(parse);
-	echo(save);
+	$print = WorldDataParser::printXML(save);
+	echo(print);
 ?>
