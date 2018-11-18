@@ -20,7 +20,7 @@
 					<li class='navli' id='leftlist'><a href="index.php"><i class="fas fa-list-ul"></i> A1 - Table</a></li>
 					<li class='navli'><a href="parse.php"><i class="fas fa-list-ul"></i> A2 - Parse</a></li>
 					<li class='navli'><a href="save.php"><i class="fas fa-list-ul"></i> A2 - Save</a></li>
-					<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A2 - Print</a></li>
+					<li class='navli'><a href="print.php"><i class="fas fa-list-ul"></i> A2 - Print</a></li>
 					<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A3 - REST</a></li>
 					<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A4 - Vis</a></li>	
 				</ul>
@@ -62,6 +62,7 @@
 						<th id="column6">internet usage</th>
 					</tr>
 				</thead>
+				<!--
 				<tbody>
 				  <tr class="row1">
 					<td class="column0">001</td>
@@ -289,6 +290,7 @@
 					<td class="column6">71.21181627          </td>
 				  </tr>
 				</tbody>
+				-->
 			</table>
 			
 			<div>

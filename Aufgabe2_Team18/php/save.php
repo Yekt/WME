@@ -1,7 +1,7 @@
 <?php 
 	include ("world_data_parser.php");
 	
-	$wdp = new WorlDataParser();
+	$wdp = new WorldDataParser();
 	
 	$parseResult = $wdp::parseCSV("../res/world_data_v1.csv");
 	$saveResult = $wdp::saveXML($parseResult);

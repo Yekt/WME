@@ -1,5 +1,5 @@
 <?php 
-class WorlDataParser {
+class WorldDataParser {
     
     function parseCSV( $path ) {
 			$retArray = [];
@@ -25,7 +25,7 @@ class WorlDataParser {
 				if( strcmp ($key, "birth rate per 1000") == 0 ) $key = "birth";
 				else if( strcmp ($key, "cell phones per 100") == 0 ) $key = "cell";
 				else if( strcmp ($key, "children per woman") == 0 ) $key = "children";
-				else if( strcmp ($key, "electricity consumption per capita") == 0 ) $key = "birth";
+				else if( strcmp ($key, "electricity consumption per capita") == 0 ) $key = "electric";
 				else if( strcmp ($key, "inflation annual") == 0 ) $key = "inflation";
 				else if( strcmp ($key, "internet user per 100") == 0 ) $key = "internet";
 				else if( strcmp ($key, "life expectancy") == 0 ) $key = "life";
@@ -44,8 +44,18 @@ class WorlDataParser {
 		else return true;
 	}
 	
-	
-	function printXML() {
+	function printXML($xml_data, $xsl_stylesheet) {
+		
+		$xsldoc = new DOMDocument();
+		$xsldoc->load($xsl_stylesheet);
+
+		$xmldoc = new DOMDocument();
+		$xmldoc->load($xml_data);
+		
+		$xsl = new XSLTProcessor();
+		$xsl->importStyleSheet($xsldoc);
+		return $xsl->transformToXML($xmldoc);
+		//http://php.net/manual/de/xsltprocessor.construct.php
 		
 	}
 }
