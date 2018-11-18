@@ -38,9 +38,10 @@ class WorlDataParser {
 		$dom->preserveWhiteSpace = false;
 		$dom->formatOutput = true;
 		$dom->loadXML($xml->asXML());
-		$ret = $dom->save('world_data.xml');
+		$result = $dom->save('world_data.xml');
 		
-		return $ret;
+		if(empty($result)) return false; //empty() can deal with false and 0(bit) alike. returns true for both cases.
+		else return true;
 	}
 	
 	
