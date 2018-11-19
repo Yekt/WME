@@ -17,22 +17,22 @@
 			<meta name="keywords" content="countries, birth rate, cellphones, electric usage, internet usage"></meta>
 		</head>
 		<body>
-			<header>
+			<header style="font-family: 'Roboto', sans-serif;">
 				<nav id='header'>
 					<a href="index.php"><div id="logo"></div></a>
 					<ul id='main_menu'>
 						<li class='navli' id='leftlist'><a href="index.php"><i class="fas fa-list-ul"></i> A1 - Table</a></li>
 						<li class='navli'><a href="parse.php"><i class="fas fa-list-ul"></i> A2 - Parse</a></li>
 						<li class='navli'><a href="save.php"><i class="fas fa-list-ul"></i> A2 - Save</a></li>
-						<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A2 - Print</a></li>
+						<li class='navli'><a href="print.php"><i class="fas fa-list-ul"></i> A2 - Print</a></li>
 						<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A3 - REST</a></li>
 						<li class='navli'><a href="index.php"><i class="fas fa-list-ul"></i> A4 - Vis</a></li>	
 					</ul>
 				</nav>
 			</header>
-			<div id='page' class='content'>
+			<div id='page' class='content' style="font-family: 'Roboto', sans-serif;">
 			
-				<h1>World Data Overview ...</h1>
+				<h1 style="font-family: 'Roboto', sans-serif;">World Data Overview ...</h1>
 
 				<div id='flowing_text'>
 					This is a placeholder flowing text copied from Wikipedia: 
