@@ -19,6 +19,26 @@ app.use( express.static( path.join(__dirname, "public") ) );
 /**************************************************************************
 ****************************** csv2json *********************************
 **************************************************************************/
+var jsonArray  = null;
+async function csv2json(){
+	
+	const csv = require('csvtojson')
+	const csvFilePath = '\world_data.csv';
+
+	csv()
+	.fromFile(csvFilePath)
+	.then((jsonObj)=>{
+		//console.log(jsonObj);
+	})
+	 
+	jsonArray = await csv().fromFile(csvFilePath);
+	console.log('Json Array created');
+	//console.log(jsonArray);
+}
+csv2json();
+console.log(jsonArray);
+
+
 
 /**************************************************************************
 ********************** handle HTTP METHODS ***********************
