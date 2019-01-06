@@ -14,7 +14,7 @@
 	<link href="assets/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
-<body>
+<body onload='getJson("/complete")'>
 
 <header id="sticky_header">
 	<nav class="container clearfix" role="navigation">
@@ -71,7 +71,7 @@
 					<select id="prop_selection">
 						<!--load options via ajax-->
 					</select>
-					<button class="green_btn" id="show_selected_prop" onclick='getJson("/json")'>Show</button>
+					<button class="green_btn" id="show_selected_prop">Show</button>
 					<button class="green_btn" id="hide_selected_prop">Hide</button>
 				</div>
 			</div>
@@ -127,6 +127,7 @@
 				</tr>
 			</thead>
 			<tbody id="table_body">
+				<div id="test"></div>
 				<!-- list countries with ajax -->
 			</tbody>
 		</table>

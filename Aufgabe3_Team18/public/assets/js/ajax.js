@@ -5,20 +5,28 @@ function getJson(path){
 		async: true,
 		success: function(data) {
 			alert('success');
-			console.log(data);
-			fillTable(data);
+			var json = JSON.parse(data)
+			console.log(json);
+			fillTable(json);
 		}, error: function(jqXHR, text, err) {
 			alert('There was an error trying to load the data.');
 		}
 	});
 }
 
-function fillTable(data){
-	for (row = 0; row < data.length; row++) {
-		for (col = 0; col < data[row].length; col++) {
-			
-			document.write();
-			
-		}
+function fillTable(json){	
+	var table = '';
+	for (row = 0; row < json.length; row++) {
+		country = json[row];
+		table += '<tr>';
+		table += '<td>'+ country.id +'</td>';
+		table += '<td>'+ country.name +'</td>';
+		table += '<td>'+ country.birth_rate_per_1000 +'</td>';
+		table += '<td>'+ country.cell_phones_per_100 +'</td>';
+		table += '<td>'+ country.children_per_woman +'</td>';
+		table += '<td>'+ country.electricity_consumption_per_capita +'</td>';
+		table += '<td>'+ country.internet_user_per_100 +'</td>';
+		table += '</tr>';
 	}
+	document.getElementById("table_body").innerHTML = table;
 }
