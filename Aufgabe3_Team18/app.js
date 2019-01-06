@@ -43,6 +43,11 @@ console.log(jsonArray);
 /**************************************************************************
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
+app.get('/json', (req, res) => {
+	res.send(JSON.stringify(jsonArray);
+	console.log('request: /json');
+});
+
 
 
 // DO NOT CHANGE!
