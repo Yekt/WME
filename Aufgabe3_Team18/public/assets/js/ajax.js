@@ -1,11 +1,13 @@
+var json;
+
 function getJson(path){
 	$.ajax({
 		type: 'GET',
 		url: 'http://localhost:3000' + path,
-		async: true,
+		async: false,
 		success: function(data) {
 			alert('success');
-			var json = JSON.parse(data)
+			json = JSON.parse(data)
 			console.log(json);
 			fillTable(json);
 		}, error: function(jqXHR, text, err) {
@@ -14,7 +16,7 @@ function getJson(path){
 	});
 }
 
-function fillTable(json){	
+function fillTable(){	
 	var table = '';
 	for (row = 0; row < json.length; row++) {
 		country = json[row];
@@ -29,4 +31,14 @@ function fillTable(json){
 		table += '</tr>';
 	}
 	document.getElementById("table_body").innerHTML = table;
+}
+
+
+function removeCountry(){
+	var input = document.getElementById("country_delete_id").value;
+
+	var country = json.find(entry=>entry.id===input);
+	delete json[country];
+	fillTable();
+	
 }

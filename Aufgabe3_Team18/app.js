@@ -43,9 +43,9 @@ console.log(jsonArray);
 /**************************************************************************
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
-app.get('/complete', (req, res) => {
+app.get('/items', (req, res) => {
 	res.send(JSON.stringify(jsonArray));
-	console.log('requested: /complete');
+	console.log('requested: /items');
 });
 
 

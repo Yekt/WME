@@ -14,7 +14,7 @@
 	<link href="assets/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
-<body onload='getJson("/complete")'>
+<body onload='getJson("/items")'>
 
 <header id="sticky_header">
 	<nav class="container clearfix" role="navigation">
@@ -106,7 +106,7 @@
 							<input type="text" name="country_delete_id" id="country_delete_id">
 						</p>
 						<p class="submit">
-							<input type="submit" name="submit" id="rm_submit" value="Remove Country">
+							<input type="submit" name="submit" id="rm_submit" value="Remove Country" onclick="removeCountry()">
 						</p>
 					</form>
 				</div>
