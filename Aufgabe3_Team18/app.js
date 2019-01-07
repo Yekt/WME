@@ -43,9 +43,24 @@ console.log(jsonArray);
 /**************************************************************************
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
-app.get('/complete', (req, res) => {
+app.get('/items', (req, res) => {
 	res.send(JSON.stringify(jsonArray));
-	console.log('requested: /complete');
+	console.log('requested: /items');
+});
+
+app.get('/items/:id', (req, res) => {
+	var id = request.params.id;
+	var country = jsonArray.find(entry => entry.id === parseInt(id));
+	if (!course) res.status(404).send('No such id ' + id + ' in database.');
+	res.send(country);
+	console.log('requested: /items/' + id);
+});
+
+app.get('/items/:id1/:id2', (req, res) => {
+	var id1 = request.params.id1;
+	var id2 = request.params.id2;
+	res.send(JSON.stringify(jsonArray));
+	console.log('requested: /items/' + id1 + '/' + id2);
 });
 
 
