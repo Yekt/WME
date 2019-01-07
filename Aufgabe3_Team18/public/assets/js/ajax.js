@@ -1,6 +1,7 @@
 var json;
 getJson('/items');
 
+
 function filterId(){
 	var inputId = document.getElementById("country_filter_id").value.toString();
 	var inputRange = document.getElementById("country_filter_range").value.toString();
@@ -44,6 +45,14 @@ function filterId(){
 }
 
 
+function removeCountry(){
+	var input = document.getElementById("country_delete_id").value;
+
+	var country = json.find(entry=>entry.id===input);
+	delete json[country];
+	fillTable();
+	
+}
 
 
 
@@ -58,7 +67,7 @@ function getJson(path){
 	$.ajax({
 		type: 'GET',
 		url: 'http://localhost:3000' + path,
-		async: true,
+		async: false,
 		success: function(data) {
 			//alert('success');
 			json = JSON.parse(data)
