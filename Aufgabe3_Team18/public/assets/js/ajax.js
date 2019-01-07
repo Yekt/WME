@@ -50,8 +50,6 @@ function removeCountry(){
 
 	var country = json.find(entry=>entry.id===input);
 	delete json[country];
-	fillTable();
-	
 }
 
 
@@ -67,7 +65,7 @@ function getJson(path){
 	$.ajax({
 		type: 'GET',
 		url: 'http://localhost:3000' + path,
-		async: false,
+		async: true,
 		success: function(data) {
 			//alert('success');
 			json = JSON.parse(data)
@@ -78,6 +76,43 @@ function getJson(path){
 		}
 	});
 }
+
+function postJson(path){
+	console.log('postJson was called with path:  ' + path);
+	$.ajax({
+		type: 'POST',
+		url: 'http://localhost:3000' + path,
+		async: true,
+		success: function(data) {
+			//alert('success');
+			json = JSON.parse(data)
+			console.log(json);
+			fillTable();
+		}, error: function(jqXHR, text, err) {
+			//alert('There was an error trying to load the data.');
+		}
+	});
+}
+
+function deleteJson(path){
+	console.log('deleteJson was called with path:  ' + path);
+	$.ajax({
+		type: 'DELETE',
+		url: 'http://localhost:3000' + path,
+		async: true,
+		success: function(data) {
+			//alert('success');
+			json = JSON.parse(data)
+			console.log(json);
+			fillTable();
+		}, error: function(jqXHR, text, err) {
+			//alert('There was an error trying to load the data.');
+		}
+	});
+}
+
+
+
 
 function fillTable(){	
 	var table = '';

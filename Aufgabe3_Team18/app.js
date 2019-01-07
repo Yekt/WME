@@ -45,24 +45,52 @@ console.log(jsonArray);
 **************************************************************************/
 app.get('/items', (req, res) => {
 	res.send(JSON.stringify(jsonArray));
-	console.log('requested: /items');
+	console.log('requested get: /items');
 });
 
+// None of the following functions could be tested due to an error that we
+// couldn't get rid of
 app.get('/items/:id', (req, res) => {
 	var id = request.params.id;
 	var country = jsonArray.find(entry => entry.id === parseInt(id));
 	if (!course) res.status(404).send('No such id ' + id + ' in database.');
-	res.send(country);
-	console.log('requested: /items/' + id);
+	res.send(JSON.stringify(country));
+	console.log('requested get: /items/' + id);
 });
 
 app.get('/items/:id1/:id2', (req, res) => {
 	var id1 = request.params.id1;
 	var id2 = request.params.id2;
-	res.send(JSON.stringify(jsonArray));
-	console.log('requested: /items/' + id1 + '/' + id2);
+	var array = [];
+	for (i = parseInt(id1); i < parseInt(id2) + 1; i++) {
+		var country = jsonArray.find(entry => entry.id === i);
+		if(country) array.push(country);
+	}
+	res.send(JSON.stringify(array));
+	console.log('requested get: /items/' + id1 + '/' + id2);
 });
 
+app.post('/items', (req, res) => {
+	// ..
+	res.send(JSON.stringify(jsonArray));
+	console.log('requested post: /items');
+});
+
+app.delete('/items', (req, res) => {
+	var country = jsonArray[jsonArray.count()-1];
+	delete jsonArray[country];
+	res.send(JSON.stringify(jsonArray));
+	console.log('requested delete: /items');
+});
+
+app.delete('/items/:id', (req, res) => {
+	var id = request.params.id;
+	var country = jsonArray.find(entry=>entry.id===input);
+	if (!course) res.status(404).send('No such id ' + id + ' in database.');
+	delete jsonArray[country];
+	res.send(JSON.stringify(jsonArray));
+	console.log('requested delete: /items/' + id);
+});
 
 
 // DO NOT CHANGE!
