@@ -19,7 +19,7 @@ app.use( express.static( path.join(__dirname, "public") ) );
 /**************************************************************************
 ****************************** csv2json *********************************
 **************************************************************************/
-var jsonArray  = null;
+var json;
 async function csv2json(){
 	
 	const csv = require('csvtojson')
@@ -31,9 +31,17 @@ async function csv2json(){
 		//console.log(jsonObj);
 	})
 	 
-	jsonArray = await csv().fromFile(csvFilePath);
+	json = await csv().fromFile(csvFilePath);
+	for(var i = 0; i < json.length; i++) {
+		// trimm json data
+		delete json[i].birth_rate_per_1000;
+		delete json[i].children_per_woman;
+		delete json[i].inflation_annual;
+		delete json[i].life_expectancy;
+		delete json[i].military_expenditure_percent_of_gdp;
+	}
+	//console.log(json);
 	console.log('Json Array created');
-	//console.log(jsonArray);
 }
 csv2json();
 
@@ -43,7 +51,7 @@ csv2json();
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
 app.get('/json', (req, res) => {
-	res.send(JSON.stringify(jsonArray));
+	res.send(JSON.stringify(json));
 	console.log('requested get: /json');
 });
 
@@ -53,7 +61,7 @@ app.get('/json', (req, res) => {
 
 
 
-// CODE AUS AUFGABE 3:
+/* CODE AUS AUFGABE 3:
 // None of the following functions could be tested due to an error that we
 // couldn't get rid of
 app.get('/items/:id', (req, res) => {
@@ -97,6 +105,7 @@ app.delete('/items/:id', (req, res) => {
 	res.send(JSON.stringify(jsonArray));
 	console.log('requested delete: /items/' + id);
 });
+*/
 
 
 // DO NOT CHANGE!
