@@ -3,10 +3,16 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>WME Course Exercise HTML, CSS and JS &bull; Sample Solution - REST API</title>
-	<meta name="description" content="Sample solution for the first course exercise HTML and CSS of the lecture Web and Multimedia Engineering">
-	<meta name="author" content="FIXME">
-	<meta name="keywords" content="Web and Multimedia Engineering, Course, Exercise">
+	<title>WME Course Exercise WebGL &bull; Sample Solution - WebGL</title>
+	<meta name="description" content="Sample solution for the fifth course exercise WebGL of the lecture Web and Multimedia Engineering">
+	<meta name="author" content="Lukas Sauter, Jean-Luc Rudow">
+	<meta name="keywords" content="Web and Multimedia Engineering, Course, Exercise, WebGL">
+	
+	<!-- mappa - link provided by the mappa website is unavailable. https://github.com/cvalenzuela/Mappa/issues/13-->
+	<script src="https://cdn.jsdelivr.net/npm/mappa-mundi@0.0.5/dist/mappa.min.js" type="text/javascript"></script>
+	
+	<!-- three js -->
+    <script src="https://threejs.org/build/three.js"></script>
 
 	<link href="assets/css/html5reset.css" type="text/css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
@@ -15,44 +21,9 @@
 </head>
 
 <body>
-
-<header id="sticky_header">
-	<nav class="container clearfix" role="navigation">
-		<a class="logo">world_data</a>
-		<ul id="main_nav" class="clearfix">
-			<li>
-				<a><i class="fa fa-list-ul"></i>A1 - Table</a>
-			</li>
-			<li>
-				<a><i class="fa fa-list-ul"></i>A2 - Parse</a>
-			</li>
-			<li>
-				<a><i class="fa fa-list-ul"></i>A2 - Save</a>
-			</li>
-			<li>
-				<a><i class="fa fa-list-ul"></i>A2 - Print</a>
-			</li>
-			<li>
-				<a><i class="fa fa-list-ul"></i>A3 - REST</a>
-			</li>
-			<li>
-				<a><i class="fa fa-list-ul"></i>A4 - Vis</a>
-			</li>
-		</ul>
-		 <a href="#" id="pull"><i class="fa fa-list-ul"></i></a>
-	</nav>
-</header>
-
-<div class="container">
 	
-
-		
-		
-		
-		
-		
-		
-
+<div class="container">
+	<canvas id="mapa"></canvas>
 </div>
 
 <footer>
@@ -60,7 +31,7 @@
 		<div>
 			<p>
 				Copyright &copy; 2016 world_data<br>
-				First course exercise <strong>HTML, CSS and JS</strong> of the lecture Web and Multimedia Engineering.
+				Fifth course exercise <strong>WebGL</strong> of the lecture Web and Multimedia Engineering.
 			</p>
 		</div>
 		<div class="right">

@@ -1,4 +1,8 @@
+
+// Load data
 var json;
+let loaded = true;
+
 $.ajax({
 	type: 'GET',
 	url: 'http://localhost:3000/json',
@@ -6,131 +10,104 @@ $.ajax({
 	success: function(data) {
 		//alert('success');
 		json = JSON.parse(data)
-		console.log('Json was successfully received from server!');
+		loaded = true;
 		console.log(json);
+		console.log('Json was successfully received from server!');
 	}, error: function(jqXHR, text, err) {
 		console.log('An error accured while trying to receive Json from server!');
-		//alert('There was an error trying to load the data.');
+		alert('There was an error trying to load the data.');
 	}
 });
 
 
-
-
-
-
-/* CODE AUS AUFGABE 3:
-var json;
-getJson('/items');
-function filterId(){
-	var inputId = document.getElementById("country_filter_id").value.toString();
-	var inputRange = document.getElementById("country_filter_range").value.toString();
-	console.log('filterId was called with id:  ' + inputId + '     filterRange was called with id:  ' + inputRange);
-	path = '/items';
-	var count = json.length;
-	var legitimate = true;
-	// prioritize filter by Id over filter by range.
-	if(inputId){
-		if(0 < parseInt(inputId) <= count){
-			path += '/' + inputId;
+// Update meshes
+let meshes = [];
+let selected; // changes with radio buttons
+var material = new THREE.MeshLambertMaterial({color: 0xff0000});
+// TODO Funktion, die selected ändert, wenn ein anderes Attribut angezeigt werden soll
+function updateMeshes() {
+	if(loaded) {
+		meshes = [];
+		//var material = new THREE.MeshLambertMaterial({color: different color});
+		let highest = 0;
+		// find highest number
+		for(let country of json) {
+			let value = country.selected;
+			if(value > highest) highest = value;
 		}
-		else {
-			alert('No such id ' + inputId + ' in database.');
-			legitimate = false;
-		}
-	}
-	else if(inputRange && inputRange.includes('-')) {
-		var array = inputRange.split('-');
-		if(array.length == 2
-			&& parseInt(array[0]) < parseInt(array[1])
-			&& 0 < parseInt(array[0]) < count
-			&& 1 < parseInt(array[1]) <= count){
-			path += '/' + array[0] + '/' + array[1];
-		}
-		else {
-			alert('Range not possible.')
-			legitimate = false;
+		// calculate height and add to mesh
+		for(let country of json) {
+			let value = country.selected;
+			let ratio = value / highest;
+			let geometry = new THREE.BoxGeometry(25, 25, 100 * ratio);
+			let mesh = new THREE.Mesh(geometry, material);
+			meshes.push(mesh);
 		}
 	}
-	else {
-		// If both inputs are empty it's impossible to say if the user was searching by
-		// Id or by Range.
-		alert('No such id ' + inputId + ' in database OR range not possible.')
-		legitimate = false;
-	}
-	if (legitimate) {
-		getJson(path);
-	}
-	return false;
 }
-function removeCountry(){
-	var input = document.getElementById("country_delete_id").value;
 
-	var country = json.find(entry=>entry.id===input);
-	delete json[country];
+
+// Scene Configurations
+let viewPortWidth = window.innerWidth;
+let viewPortHeight = window.innerHeight;
+console.log('View Port size: ' + viewPortWidth + 'x' + viewPortHeight);
+let WIDTH = 1170; //1170
+let HEIGHT = viewPortHeight - 85;
+let VIEW_ANGLE = 45;
+let ASPECT = WIDTH / HEIGHT;
+const NEAR = 0.1;
+const FAR = 10000;
+
+
+// Scene, camera, canvas, renderer
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+var canvas = document.getElementById("mapa");
+var renderer = new THREE.WebGLRenderer({alpha: true, canvas: canvas, antialias: true});
+
+camera.position.z = 300;
+scene.add(camera);
+renderer.setSize(WIDTH, HEIGHT);
+renderer.setClearColor(0x707070);
+
+
+// Light
+var light = new THREE.PointLight(0xffffff, 1.2);
+light.position.set(0, 0, 6);
+scene.add(light);
+
+
+// MapboxGL
+//const key = 'pk.eyJ1IjoicmljYXJkb2xhbmduZXIiLCJhIjoiY2pxano2enh2MG1qazN4bm5lajIzeDl3eiJ9.wK0MtuxLgJxDcGUksKMeKgb';
+const key = 'pk.eyJ1IjoicGlra3UiLCJhIjoiY2pwenloamxoMDl0djQybWxlY3hkaGVpZSJ9.MKRV1BETvooEv5r_dEaXTQ';
+
+var options = {
+    lat: 0,
+    lng: 0,
+    zoom: 4,
+    pitch: 25
 }
-function getJson(path){
-	console.log('getJson was called with path:  ' + path);
-	$.ajax({
-		type: 'GET',
-		url: 'http://localhost:3000' + path,
-		async: true,
-		success: function(data) {
-			//alert('success');
-			json = JSON.parse(data)
-			console.log(json);
-			fillTable();
-		}, error: function(jqXHR, text, err) {
-			//alert('There was an error trying to load the data.');
-		}
-	});
+
+var mappa = new Mappa('MapboxGL', key);
+var myMap = mappa.tileMap(options);
+myMap.overlay(canvas);
+
+
+// Upate mesch position
+myMap.onChange(update);
+function update() {
+    if(loaded){
+        meshes.forEach(function(mesh, item){
+            var pos = myMap.latLngToPixel(meteorites[item].lat , meteorites[item].lng);
+            var vector = new THREE.Vector3();
+            vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
+            vector.unproject(camera);
+            var dir = vector.sub(camera.position).normalize();
+            var distance = -camera.position.z / dir.z;
+            var newPos = camera.position.clone().add(dir.multiplyScalar(distance));
+
+            mesh.position.set(newPos.x, newPos.y, newPos.z);
+            scene.add(mesh);
+        })
+    }
 }
-function postJson(path){
-	console.log('postJson was called with path:  ' + path);
-	$.ajax({
-		type: 'POST',
-		url: 'http://localhost:3000' + path,
-		async: true,
-		success: function(data) {
-			//alert('success');
-			json = JSON.parse(data)
-			console.log(json);
-			fillTable();
-		}, error: function(jqXHR, text, err) {
-			//alert('There was an error trying to load the data.');
-		}
-	});
-}
-function deleteJson(path){
-	console.log('deleteJson was called with path:  ' + path);
-	$.ajax({
-		type: 'DELETE',
-		url: 'http://localhost:3000' + path,
-		async: true,
-		success: function(data) {
-			//alert('success');
-			json = JSON.parse(data)
-			console.log(json);
-			fillTable();
-		}, error: function(jqXHR, text, err) {
-			//alert('There was an error trying to load the data.');
-		}
-	});
-}
-function fillTable(){	
-	var table = '';
-	for (row = 0; row < json.length; row++) {
-		country = json[row];
-		table += '<tr>';
-		table += '<td>'+ country.id +'</td>';
-		table += '<td>'+ country.name +'</td>';
-		table += '<td>'+ country.birth_rate_per_1000 +'</td>';
-		table += '<td>'+ country.cell_phones_per_100 +'</td>';
-		table += '<td>'+ country.children_per_woman +'</td>';
-		table += '<td>'+ country.electricity_consumption_per_capita +'</td>';
-		table += '<td>'+ country.internet_user_per_100 +'</td>';
-		table += '</tr>';
-	}
-	document.getElementById("table_body").innerHTML = table;
-}
-*/
