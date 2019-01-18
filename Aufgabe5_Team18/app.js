@@ -40,7 +40,7 @@ async function csv2json(){
 		delete json[i].life_expectancy;
 		delete json[i].military_expenditure_percent_of_gdp;
 	}
-	//console.log(json);
+	console.log(json);
 	console.log('Json Array created');
 }
 csv2json();

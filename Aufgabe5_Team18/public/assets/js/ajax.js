@@ -23,26 +23,98 @@ $.ajax({
 let meshes = [];
 let loaded = false;
 let selected = ''; // changes with radio buttons
-var material = new THREE.MeshLambertMaterial({color: 0xff0000});
-// TODO Funktion, die selected ändert, wenn ein anderes Attribut angezeigt werden soll
+var material = new THREE.MeshLambertMaterial({color: 0xffffff});
+
 function updateMeshes() {
-	if(loaded) meshes = [];
-	else loaded = true;
-	//var material = new THREE.MeshLambertMaterial({color: different color});
-	let highest = 0;
-	// find highest number
-	for(let country of json) {
-		let value = country.selected;
-		if(value > highest) highest = value;
+	// https://stackoverflow.com/questions/9618504/how-to-get-the-selected-radio-button-s-value
+	var radio = document.getElementsByName('selection');
+	for(var i = 0; i < radio.length; i++) {
+		if (radio[i].checked) {
+			selected = radio[i].value;
+			console.log(selected);
+			break;
+		}
 	}
+	
+	let highest = 0;
+	for(var i = 0; i < json.length; i++) {
+		let value = getValue(json[i]);
+		if(value >= highest) highest = value;
+	}
+	
+	// change color
+	switch(selected) {
+		case 'birth':
+			material = new THREE.MeshLambertMaterial({color: 0xff0000});
+			break;
+		case 'children':
+			material = new THREE.MeshLambertMaterial({color: 0x00ff00});
+			break;
+		case 'gdp':
+			material = new THREE.MeshLambertMaterial({color: 0x0000ff});
+			break;
+		case 'electricity':
+			material = new THREE.MeshLambertMaterial({color: 0xffff00});
+			break;
+		case 'internet':
+			material = new THREE.MeshLambertMaterial({color: 0xff00ff});
+			break;
+		case 'phones':
+			material = new THREE.MeshLambertMaterial({color: 0x00ffff});
+			break;
+		default:
+			material = new THREE.MeshLambertMaterial({color: 0xffffff});
+			break;
+	}
+	
+	// remove old meshes
+	if(loaded) {
+		for(var mesh of meshes) {
+			scene.remove(mesh);
+		}
+		meshes = [];
+	}
+	
 	// calculate height and add to mesh
-	for(let country of json) {
-		let value = country.selected;
+	for(var i = 0; i < json.length; i++) {
+		let value = getValue(json[i]);
 		let ratio = value / highest;
-		let geometry = new THREE.BoxGeometry(25, 25, 100 * ratio);
-		let mesh = new THREE.Mesh(geometry, material);
+		let bar = new THREE.BoxGeometry(10, 10, 50 * ratio);
+		let mesh = new THREE.Mesh(bar, material);
+		mesh.rotation.x -= 0.51;
 		meshes.push(mesh);
 	}
+	console.log('Meshes updated!');
+	loaded = true;
+	update();
+}
+
+function getValue(o) {
+	let value;
+	switch(selected) {
+		case 'birth':
+			value = o.birth_rate_per_1000;
+			break;
+		case 'children':
+			value = o.children_per_woman;
+			break;
+		case 'gdp':
+			value = o.gdp_per_capita;
+			break;
+		case 'electricity':
+			value = o.electricity_consumption_per_capita;
+			break;
+		case 'internet':
+			value = o.internet_user_per_100;
+			break;
+		case 'phones':
+			value = o.cell_phones_per_100;
+			break;
+		default:
+			value = 0;
+			break;
+	}
+	return parseFloat(value);
 }
 
 
@@ -52,7 +124,7 @@ let viewPortHeight = window.innerHeight;
 console.log('View Port size: ' + viewPortWidth + 'x' + viewPortHeight);
 let WIDTH = 1170; //1170
 let HEIGHT = viewPortHeight - 90;
-let VIEW_ANGLE = 45;
+let VIEW_ANGLE = 35;
 let ASPECT = WIDTH / HEIGHT;
 const NEAR = 0.1;
 const FAR = 10000;
@@ -67,46 +139,55 @@ var renderer = new THREE.WebGLRenderer({alpha: true, canvas: canvas, antialias: 
 camera.position.z = 300;
 scene.add(camera);
 renderer.setSize(WIDTH, HEIGHT);
-renderer.setClearColor(0x707070);
+//renderer.setClearColor(0x707070);
 
 
 // Light
-var light = new THREE.PointLight(0xffffff, 1.2);
+var light = new THREE.PointLight(0xffffff, 0.7);
 light.position.set(0, 0, 6);
 scene.add(light);
+var ambient = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambient);
 
 
 // MapboxGL
 //const key = 'pk.eyJ1IjoicmljYXJkb2xhbmduZXIiLCJhIjoiY2pxano2enh2MG1qazN4bm5lajIzeDl3eiJ9.wK0MtuxLgJxDcGUksKMeKgb';
 const key = 'pk.eyJ1IjoicGlra3UiLCJhIjoiY2pwenloamxoMDl0djQybWxlY3hkaGVpZSJ9.MKRV1BETvooEv5r_dEaXTQ';
-
 var options = {
     lat: 0,
     lng: 0,
     zoom: 4,
-    pitch: 25
+    pitch: 30
 }
-
 var mappa = new Mappa('MapboxGL', key);
-var myMap = mappa.tileMap(options);
-myMap.overlay(canvas);
+var map = mappa.tileMap(options);
+map.overlay(canvas);
+
 
 
 // Upate mesch position
-myMap.onChange(update);
+map.onChange(update);
 function update() {
-    if(loaded){
-        meshes.forEach(function(mesh, item){
-            var pos = myMap.latLngToPixel(json[item].lat , json[item].lng);
-            var vector = new THREE.Vector3();
-            vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
-            vector.unproject(camera);
-            var dir = vector.sub(camera.position).normalize();
-            var distance = -camera.position.z / dir.z;
-            var newPos = camera.position.clone().add(dir.multiplyScalar(distance));
+	if (loaded) {
+		meshes.forEach((mesh, item) => {
+			const pos = map.latLngToPixel(parseFloat(json[item].gps_lat), parseFloat(json[item].gps_long));
+			const vector = new THREE.Vector3();
+			vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
+			vector.unproject(camera);
+			const dir = vector.sub(camera.position).normalize();
+			const distance = -camera.position.z / dir.z;
+			const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
 
-            mesh.position.set(newPos.x, newPos.y, newPos.z);
-            scene.add(mesh);
-        })
-    }
+			mesh.position.set(newPos.x, newPos.y, newPos.z);
+			scene.add(mesh);
+			//renderer.render(scene, camera);
+		})
+	}
 }
+
+const animate = () => {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+};
+
+animate();
