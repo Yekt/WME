@@ -1,7 +1,6 @@
 
 // Load data
 var json;
-let loaded = true;
 
 $.ajax({
 	type: 'GET',
@@ -22,27 +21,27 @@ $.ajax({
 
 // Update meshes
 let meshes = [];
-let selected; // changes with radio buttons
+let loaded = false;
+let selected = ''; // changes with radio buttons
 var material = new THREE.MeshLambertMaterial({color: 0xff0000});
 // TODO Funktion, die selected ändert, wenn ein anderes Attribut angezeigt werden soll
 function updateMeshes() {
-	if(loaded) {
-		meshes = [];
-		//var material = new THREE.MeshLambertMaterial({color: different color});
-		let highest = 0;
-		// find highest number
-		for(let country of json) {
-			let value = country.selected;
-			if(value > highest) highest = value;
-		}
-		// calculate height and add to mesh
-		for(let country of json) {
-			let value = country.selected;
-			let ratio = value / highest;
-			let geometry = new THREE.BoxGeometry(25, 25, 100 * ratio);
-			let mesh = new THREE.Mesh(geometry, material);
-			meshes.push(mesh);
-		}
+	if(loaded) meshes = [];
+	else loaded = true;
+	//var material = new THREE.MeshLambertMaterial({color: different color});
+	let highest = 0;
+	// find highest number
+	for(let country of json) {
+		let value = country.selected;
+		if(value > highest) highest = value;
+	}
+	// calculate height and add to mesh
+	for(let country of json) {
+		let value = country.selected;
+		let ratio = value / highest;
+		let geometry = new THREE.BoxGeometry(25, 25, 100 * ratio);
+		let mesh = new THREE.Mesh(geometry, material);
+		meshes.push(mesh);
 	}
 }
 
@@ -52,7 +51,7 @@ let viewPortWidth = window.innerWidth;
 let viewPortHeight = window.innerHeight;
 console.log('View Port size: ' + viewPortWidth + 'x' + viewPortHeight);
 let WIDTH = 1170; //1170
-let HEIGHT = viewPortHeight - 85;
+let HEIGHT = viewPortHeight - 90;
 let VIEW_ANGLE = 45;
 let ASPECT = WIDTH / HEIGHT;
 const NEAR = 0.1;
@@ -98,7 +97,7 @@ myMap.onChange(update);
 function update() {
     if(loaded){
         meshes.forEach(function(mesh, item){
-            var pos = myMap.latLngToPixel(meteorites[item].lat , meteorites[item].lng);
+            var pos = myMap.latLngToPixel(json[item].lat , json[item].lng);
             var vector = new THREE.Vector3();
             vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
             vector.unproject(camera);

@@ -34,8 +34,8 @@ async function csv2json(){
 	json = await csv().fromFile(csvFilePath);
 	for(var i = 0; i < json.length; i++) {
 		// trimm json data
-		delete json[i].birth_rate_per_1000;
-		delete json[i].children_per_woman;
+		delete json[i].id;
+		delete json[i].gdp_per_capita_growth;
 		delete json[i].inflation_annual;
 		delete json[i].life_expectancy;
 		delete json[i].military_expenditure_percent_of_gdp;
@@ -55,57 +55,6 @@ app.get('/json', (req, res) => {
 	console.log('requested get: /json');
 });
 
-
-
-
-
-
-
-/* CODE AUS AUFGABE 3:
-// None of the following functions could be tested due to an error that we
-// couldn't get rid of
-app.get('/items/:id', (req, res) => {
-	var id = request.params.id;
-	var country = jsonArray.find(entry => entry.id === parseInt(id));
-	if (!course) res.status(404).send('No such id ' + id + ' in database.');
-	res.send(JSON.stringify(country));
-	console.log('requested get: /items/' + id);
-});
-
-app.get('/items/:id1/:id2', (req, res) => {
-	var id1 = request.params.id1;
-	var id2 = request.params.id2;
-	var array = [];
-	for (i = parseInt(id1); i < parseInt(id2) + 1; i++) {
-		var country = jsonArray.find(entry => entry.id === i);
-		if(country) array.push(country);
-	}
-	res.send(JSON.stringify(array));
-	console.log('requested get: /items/' + id1 + '/' + id2);
-});
-
-app.post('/items', (req, res) => {
-	// ..
-	res.send(JSON.stringify(jsonArray));
-	console.log('requested post: /items');
-});
-
-app.delete('/items', (req, res) => {
-	var country = jsonArray[jsonArray.count()-1];
-	delete jsonArray[country];
-	res.send(JSON.stringify(jsonArray));
-	console.log('requested delete: /items');
-});
-
-app.delete('/items/:id', (req, res) => {
-	var id = request.params.id;
-	var country = jsonArray.find(entry=>entry.id===input);
-	if (!course) res.status(404).send('No such id ' + id + ' in database.');
-	delete jsonArray[country];
-	res.send(JSON.stringify(jsonArray));
-	console.log('requested delete: /items/' + id);
-});
-*/
 
 
 // DO NOT CHANGE!
