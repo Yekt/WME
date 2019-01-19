@@ -179,7 +179,15 @@ function update() {
 
 			mesh.position.set(newPos.x, newPos.y, newPos.z);
 			scene.add(mesh);
-			renderer.render(scene, camera);
+			//renderer.render(scene, camera);
 		})
 	}
 }
+
+// Animate loop
+const animate = () => {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+};
+
+animate();
