@@ -31,7 +31,6 @@ function updateMeshes() {
 	for(var i = 0; i < radio.length; i++) {
 		if (radio[i].checked) {
 			selected = radio[i].value;
-			console.log(selected);
 			break;
 		}
 	}
@@ -84,7 +83,7 @@ function updateMeshes() {
 		mesh.rotation.x -= 0.51;
 		meshes.push(mesh);
 	}
-	console.log('Meshes updated!');
+	console.log('Meshes updated for ' + selected + '!');
 	loaded = true;
 	update();
 }
@@ -122,8 +121,8 @@ function getValue(o) {
 let viewPortWidth = window.innerWidth;
 let viewPortHeight = window.innerHeight;
 console.log('View Port size: ' + viewPortWidth + 'x' + viewPortHeight);
-let WIDTH = 1170; //1170
-let HEIGHT = viewPortHeight - 90;
+let WIDTH = 1450;
+let HEIGHT = viewPortHeight;
 let VIEW_ANGLE = 35;
 let ASPECT = WIDTH / HEIGHT;
 const NEAR = 0.1;
@@ -180,14 +179,7 @@ function update() {
 
 			mesh.position.set(newPos.x, newPos.y, newPos.z);
 			scene.add(mesh);
-			//renderer.render(scene, camera);
+			renderer.render(scene, camera);
 		})
 	}
 }
-
-const animate = () => {
-  requestAnimationFrame(animate);
-  renderer.render(scene, camera);
-};
-
-animate();
