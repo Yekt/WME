@@ -74,7 +74,7 @@ body {
 /*--------------------------------------------------------------------------------------------------------------*/
 
 #input {
-	border: 1px rgba(255, 255, 255, 0.4);
+	border-radius: 15px;
 	display: block;
 	text-align: left;
 	transition: 0.7s;
@@ -84,13 +84,12 @@ body {
 	position: fixed;
 	
 	width: 185px;
-	height: 250px;
+	height: 255px;
 	background-color: rgba(255, 255, 255, 0.4);
 	z-index: 2;
 }
 
 #input:hover {
-	border: 1px solid #c1c1c1;
 	background-color: rgba(255, 255, 255, 1);
 }
 
