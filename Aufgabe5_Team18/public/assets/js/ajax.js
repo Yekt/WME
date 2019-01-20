@@ -224,54 +224,73 @@ const animate = () => {
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
 
-    var mouse, raycaster;
-	
-        //add raycaster and mouse as 2D vector
-        raycaster = new THREE.Raycaster();
-        mouse = new THREE.Vector2();
+//popup and closebutton
 
+const modal = document.getElementById('popup');
+const closeBtn = document.getElementsByClassName('close')[0];
+closeBtn.addEventListener('click', closeModal);
 
-		//add event listener for mouse and calls function when activated
-        document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+function openModal() {
+  modal.style.display = 'block';
+}
+
+function closeModal() {
+  modal.style.display = 'none';
+}
+//https://www.youtube.com/watch?v=6ophW7Ask_0
+
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+
+//add raycaster and mouse as 2D vector
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
+
+//add event listener for mouse and calls function when activated
+document.addEventListener( 'mousedown', onDocumentMouseDown, false );
       
+function onDocumentMouseDown( event ) {
 
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-    function onDocumentMouseDown( event ) {
+	raycaster.setFromCamera( mouse, camera );
 
-        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-        raycaster.setFromCamera( mouse, camera );
-
-        var intersects = raycaster.intersectObjects( meshes );
+	var intersects = raycaster.intersectObjects( meshes );
         
-        var color = (Math.random() * 0xffffff);
+	var color = (Math.random() * 0xffffff);
 
-        if ( intersects.length > 0 ) {
-			// get Data for country
-			data = intersects[0].object.name.split(';');
-			name = data[0];
-			value = Math.round( data[1] * 10) / 10;
-			console.log(name, value);
+	if ( intersects.length > 0 ) {
+	// get Data for country
+	data = intersects[0].object.name.split(';');
+	name = data[0];
+	value = Math.round( data[1] * 10) / 10;
+	console.log(name, value);
+	
+	intersects[ 0 ].object.material.color.setHex( color );
+            
+	this.temp = intersects[ 0 ].object.material.color.getHexString();
+	this.name = intersects[ 0 ].object.name;
+            
 			
-            intersects[ 0 ].object.material.color.setHex( color );
-            
-            this.temp = intersects[ 0 ].object.material.color.getHexString();
-            this.name = intersects[ 0 ].object.name;
-            
-            $( ".text" ).empty();
-			$( ".popup" ).append( "<div class='text'><p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p></div>" );
-            $(".popup").show();
-            
-        }
-        
-    } 		
+			
+	//modal.style.top = ;
+	//modal.style.left = ;
+	
+	document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
+	openModal();
+	}
+} 		
 //https://www.youtube.com/watch?v=ckcuQw2fDT4&
 //https://codepen.io/wpdildine/pen/ZGyRVN/
+//https://threejs.org/docs/#api/en/core/Raycaster
 
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
+
+
 
 
 animate();
