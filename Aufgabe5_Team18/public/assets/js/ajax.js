@@ -217,10 +217,8 @@ const animate = () => {
 
     function onDocumentMouseDown( event ) {
 
-        event.preventDefault();
-
-        mouse.x = ( event.clientX / renderer.domElement.width ) * 2 - 1;
-        mouse.y = - ( event.clientY / renderer.domElement.height ) * 2 + 1;
+        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
         raycaster.setFromCamera( mouse, camera );
 
@@ -241,7 +239,7 @@ const animate = () => {
             this.name = intersects[ 0 ].object.name;
             
             $( ".text" ).empty();
-            $( ".popup" ).append( "<div class='text'><p>This is the color <strong>#" + this.temp + "</strong> and the name assigned in Blender is <strong>" + this.name  + "</strong></p></div>" );
+			$( ".popup" ).append( "<div class='text'><p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p></div>" );
             $(".popup").show();
             
         }
