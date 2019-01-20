@@ -256,8 +256,22 @@ var mouse = new THREE.Vector2();
 
 //add event listener for mouse and calls function when activated
 document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-      
+window.addEventListener( 'resize', onWindowResize, false );
+	  
+	  
+function onWindowResize() {
+	
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	
+	renderer.setSize( window.innerWidth, window.innerHeight );
+}
+
+
+	  
 function onDocumentMouseDown( event ) {
+	
+	event.preventDefault();
 
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
