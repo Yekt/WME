@@ -81,8 +81,7 @@ function updateMeshes() {
 		let ratio = value / highest_value;
 		let bar = new THREE.BoxGeometry(10, 10, 50 * ratio);
 		let mesh = new THREE.Mesh(bar, material);
-		mesh.rotation.x -= 0.51;
-		mesh.name = json[i].name + ';' + value;
+		mesh.name = json[i].name + ';' + value;		
 		meshes.push(mesh);
 	}
 	console.log('Meshes updated for ' + selected + '!');
@@ -167,7 +166,7 @@ map.overlay(canvas);
 
 
 
-// Upate mesch position
+// Upate mesh position
 map.onChange(update);
 function update() {
 	if (loaded) {
@@ -185,8 +184,30 @@ function update() {
 			const ratio = value / highest_value;
 			const bar_height = ratio * 50;
 			const delta = (bar_height / 2) - 0.5;
-
+			
 			mesh.position.set(newPos.x, newPos.y, delta);
+			
+			
+			const pitch = map.map.transform.pitch * -1;
+			const tilt = ((2* Math.PI)/360) * pitch;
+			mesh.rotation.x = tilt;
+			/*
+			const axis = new THREE.Vector3(1, 0, 0).normalize();
+			const quaternion = new THREE.Quaternion();
+			const current = mesh.rotation.x;
+			console.log(current);
+			const target = current + tilt;
+			console.log(target);
+			quaternion.setFromAxisAngle(axis, target);
+			mesh.applyQuaternion(quaternion);
+			console.log(mesh.rotation.x);
+			*/
+			
+			
+			const turn = - map.map.transform.angle;
+			mesh.rotation.z = turn;
+			
+			
 			scene.add(mesh);
 			//renderer.render(scene, camera);
 		})
