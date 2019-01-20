@@ -260,8 +260,8 @@ function onDocumentMouseDown( event ) {
 	//https://threejs.org/docs/#api/en/core/Raycaster
 	event.preventDefault();
 
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	mouse.x = ( event.clientX / WIDTH ) * 2 - 1;
+	mouse.y = - ( event.clientY / HEIGHT ) * 2 + 1;
 
 	raycaster.setFromCamera( mouse, camera );
 
@@ -278,7 +278,7 @@ function onDocumentMouseDown( event ) {
 		var newPos = getPixel(lat, long);
 				
 		modal.style.top = (event.clientY - 120) + "px";
-		modal.style.left = (event.clientX - 100) + "px";
+		modal.style.left = (event.clientX - 80) + "px";
 		
 		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong><br> is <strong>" + value.toString() + "</strong><br> for <strong>" + name + "</strong></p>";
 		openModal();
