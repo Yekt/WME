@@ -287,8 +287,8 @@ function onDocumentMouseDown( event ) {
 		var long = data[3];
 		var newPos = getPixel(lat, long);
 				
-		modal.style.top = (event.clientY - 80) + "px";
-		modal.style.left = event.clientX + "px";
+		modal.style.top = (event.clientY - 120) + "px";
+		modal.style.left = (event.clientX - 100) + "px";
 		
 		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
 		openModal();
