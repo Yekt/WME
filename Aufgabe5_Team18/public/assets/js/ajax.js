@@ -1,31 +1,107 @@
-
-// Load data
+// data
 var json;
-
-$.ajax({
-	type: 'GET',
-	url: 'http://localhost:3000/json',
-	async: true,
-	success: function(data) {
-		//alert('success');
-		json = JSON.parse(data)
-		loaded = true;
-		console.log(json);
-		console.log('Json was successfully received from server!');
-	}, error: function(jqXHR, text, err) {
-		console.log('An error accured while trying to receive Json from server!');
-		alert('There was an error trying to load the data.');
-	}
-});
-
-
-// Update meshes
-let meshes = [];
 let loaded = false;
-let selected = ''; // changes with radio buttons
+let selected = '';
 let highest_value = 0;
+
+// meshes
+let meshes = [];
 var material = new THREE.MeshLambertMaterial({color: 0xffffff});
 
+// scene, camera, canvas, renderer, light
+let WIDTH, HEIGHT, ASPECT;
+const VIEW_ANGLE = 45;
+const NEAR = 0.1;
+const FAR = 10000;
+var scene, camera, canvas, renderer, light, ambient;
+
+// MapboxGL
+//const key = 'pk.eyJ1IjoicmljYXJkb2xhbmduZXIiLCJhIjoiY2pxano2enh2MG1qazN4bm5lajIzeDl3eiJ9.wK0MtuxLgJxDcGUksKMeKgb';
+const key = 'pk.eyJ1IjoicGlra3UiLCJhIjoiY2pwenloamxoMDl0djQybWxlY3hkaGVpZSJ9.MKRV1BETvooEv5r_dEaXTQ';
+var options, mappa, map;
+
+// popup
+const modal = document.getElementById('popup');
+const closeBtn = document.getElementsByClassName('close')[0];
+
+// raycaster
+var raycaster, mouse;
+
+
+init();
+
+// Animate loop
+const animate = () => {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+};
+animate();
+
+
+
+function init() {
+	// get data
+	$.ajax({
+		type: 'GET',
+		url: 'http://localhost:3000/json',
+		async: true,
+		success: function(data) {
+			json = JSON.parse(data)
+			loaded = true;
+			console.log(json);
+			console.log('Json was successfully received from server!');
+		}, error: function(jqXHR, text, err) {
+			console.log('An error accured while trying to receive Json from server!');
+			alert('There was an error trying to load the data.');
+		}
+	});
+	
+	// Scene, camera, canvas, renderer, light
+	WIDTH = window.innerWidth - 17;
+	HEIGHT = window.innerHeight - 85;
+	ASPECT = WIDTH / HEIGHT;
+	console.log('View Port size: ' + WIDTH + 'x' + HEIGHT);
+	
+	scene = new THREE.Scene();
+	camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+	canvas = document.getElementById("mapa");
+	renderer = new THREE.WebGLRenderer({alpha: true, canvas: canvas, antialias: true});
+	camera.position.z = 300;
+	scene.add(camera);
+	renderer.setSize(WIDTH, HEIGHT);
+	
+	light = new THREE.PointLight(0xffffff, 0.7);
+	light.position.set(0, 0, 6);
+	ambient = new THREE.AmbientLight(0xffffff, 0.4);
+	scene.add(light);
+	scene.add(ambient);
+	
+	//MapboxGL
+	options = {
+		lat: 0,
+		lng: 0,
+		zoom: 4,
+		pitch: 30
+	}
+	mappa = new Mappa('MapboxGL', key);
+	map = mappa.tileMap(options);
+	map.overlay(canvas);
+	
+	// raycaster and mouse
+	raycaster = new THREE.Raycaster();
+	mouse = new THREE.Vector2();
+	
+	// listeners
+	map.onChange(update);
+	closeBtn.addEventListener( 'click', closeModal);
+	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+	window.addEventListener( 'resize', onWindowResize, false );
+}
+
+
+
+
+// Update mesh data
 function updateMeshes() {
 	// https://stackoverflow.com/questions/9618504/how-to-get-the-selected-radio-button-s-value
 	var radio = document.getElementsByName('selection');
@@ -35,13 +111,12 @@ function updateMeshes() {
 			break;
 		}
 	}
-	
+	// find highest value
 	highest_value = 0;
 	for(var i = 0; i < json.length; i++) {
 		let value = getValue(json[i]);
 		if(value >= highest_value) highest_value = value;
-	}
-	
+	}		
 	// change color
 	switch(selected) {
 		case 'birth':
@@ -65,17 +140,15 @@ function updateMeshes() {
 		default:
 			material = new THREE.MeshLambertMaterial({color: 0xffffff});
 			break;
-	}
-	
+	}		
 	// remove old meshes
 	if(loaded) {
 		for(var mesh of meshes) {
 			scene.remove(mesh);
 		}
 		meshes = [];
-	}
-	
-	// calculate height and add to mesh
+	}	
+	// calculate height and create mesh
 	for(var i = 0; i < json.length; i++) {
 		let value = getValue(json[i]);
 		let ratio = value / highest_value;
@@ -118,68 +191,10 @@ function getValue(o) {
 }
 
 
-// Scene Configurations
-let viewPortWidth = window.innerWidth;
-let viewPortHeight = window.innerHeight;
-console.log('View Port size: ' + viewPortWidth + 'x' + viewPortHeight);
-let WIDTH = viewPortWidth - 17;
-let HEIGHT = viewPortHeight - 85;
-let VIEW_ANGLE = 45;
-let ASPECT = WIDTH / HEIGHT;
-const NEAR = 0.1;
-const FAR = 10000;
 
-
-// Scene, camera, canvas, renderer
-var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
-var canvas = document.getElementById("mapa");
-var renderer = new THREE.WebGLRenderer({alpha: true, canvas: canvas, antialias: true});
-
-camera.position.z = 300;
-scene.add(camera);
-renderer.setSize(WIDTH, HEIGHT);
-//renderer.setClearColor(0x707070);
-
-
-// Light
-var light = new THREE.PointLight(0xffffff, 0.7);
-light.position.set(0, 0, 6);
-scene.add(light);
-var ambient = new THREE.AmbientLight(0xffffff, 0.4);
-scene.add(ambient);
-
-
-// MapboxGL
-//const key = 'pk.eyJ1IjoicmljYXJkb2xhbmduZXIiLCJhIjoiY2pxano2enh2MG1qazN4bm5lajIzeDl3eiJ9.wK0MtuxLgJxDcGUksKMeKgb';
-const key = 'pk.eyJ1IjoicGlra3UiLCJhIjoiY2pwenloamxoMDl0djQybWxlY3hkaGVpZSJ9.MKRV1BETvooEv5r_dEaXTQ';
-var options = {
-    lat: 0,
-    lng: 0,
-    zoom: 4,
-    pitch: 30
-}
-var mappa = new Mappa('MapboxGL', key);
-var map = mappa.tileMap(options);
-map.overlay(canvas);
-//console.log(map.getPitch);
-
-
-function getPixel(lat, long) {
-	lat = parseFloat(lat);
-	long = parseFloat(long);
-	const pos = map.latLngToPixel(lat, long);
-	const vector = new THREE.Vector3();
-	vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
-	vector.unproject(camera);
-	const dir = vector.sub(camera.position).normalize();
-	const distance = -camera.position.z / dir.z;
-	const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
-	return newPos;
-}
+// Listeners
 
 // Upate mesh position
-map.onChange(update);
 function update() {
 	if (loaded) {
 		meshes.forEach((mesh, item) => {
@@ -193,12 +208,11 @@ function update() {
 			
 			mesh.position.set(newPos.x, newPos.y, delta);
 			
-			
+			// respond to pitch
 			const pitch = map.map.transform.pitch * -1;
 			const tilt = ((2* Math.PI)/360) * pitch;
 			mesh.rotation.x = tilt;
-			/*
-			const axis = new THREE.Vector3(1, 0, 0).normalize();
+			/*const axis = new THREE.Vector3(1, 0, 0).normalize();
 			const quaternion = new THREE.Quaternion();
 			const current = mesh.rotation.x;
 			console.log(current);
@@ -206,36 +220,31 @@ function update() {
 			console.log(target);
 			quaternion.setFromAxisAngle(axis, target);
 			mesh.applyQuaternion(quaternion);
-			console.log(mesh.rotation.x);
-			*/
+			console.log(mesh.rotation.x);*/
 			
-			
+			// respond to rotation
 			const turn = - map.map.transform.angle;
 			mesh.rotation.z = turn;
 			
-			
 			scene.add(mesh);
-			//renderer.render(scene, camera);
 		})
 	}
 }
-
-// Animate loop
-const animate = () => {
-  requestAnimationFrame(animate);
-  renderer.render(scene, camera);
-};
-
-//--------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------
+function getPixel(lat, long) {
+	lat = parseFloat(lat);
+	long = parseFloat(long);
+	const pos = map.latLngToPixel(lat, long);
+	const vector = new THREE.Vector3();
+	vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
+	vector.unproject(camera);
+	const dir = vector.sub(camera.position).normalize();
+	const distance = -camera.position.z / dir.z;
+	const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
+	return newPos;
+}
 
 //popup and closebutton
-
-const modal = document.getElementById('popup');
-const closeBtn = document.getElementsByClassName('close')[0];
-closeBtn.addEventListener('click', closeModal);
-
+//https://www.youtube.com/watch?v=6ophW7Ask_0
 function openModal() {
   modal.style.display = 'block';
 }
@@ -243,22 +252,8 @@ function openModal() {
 function closeModal() {
   modal.style.display = 'none';
 }
-//https://www.youtube.com/watch?v=6ophW7Ask_0
-//https://codepen.io/bradtraversy/pen/zEOrPp
 
-//--------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------
-
-//add raycaster and mouse as 2D vector
-var raycaster = new THREE.Raycaster();
-var mouse = new THREE.Vector2();
-
-//add event listener for mouse and calls function when activated
-document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-window.addEventListener( 'resize', onWindowResize, false );
-	  
-	  
+// window resize
 function onWindowResize() {
 	
 	camera.aspect = window.innerWidth / window.innerHeight;
@@ -267,10 +262,10 @@ function onWindowResize() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
-
-	  
+// popup on mouse click
 function onDocumentMouseDown( event ) {
-	
+	//https://codepen.io/wpdildine/pen/ZGyRVN/
+	//https://threejs.org/docs/#api/en/core/Raycaster
 	event.preventDefault();
 
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
@@ -279,8 +274,6 @@ function onDocumentMouseDown( event ) {
 	raycaster.setFromCamera( mouse, camera );
 
 	var intersects = raycaster.intersectObjects( meshes );
-        
-	var color = (Math.random() * 0xffffff);
 
 	if ( intersects.length > 0 ) {
 		// get Data for country
@@ -293,9 +286,6 @@ function onDocumentMouseDown( event ) {
 		var newPos = getPixel(lat, long);
 		var xcor = ((newPos.x +1)/2) * window.innerWidth;
 		var ycor = ((newPos.y -1)/-2) * window.innerHeight;
-		
-		intersects[ 0 ].object.material.color.setHex( color );
-		console.log(newPos);
 				
 		modal.style.top = newPos.x + "px";
 		modal.style.left = newPos.y + "px";
@@ -304,15 +294,3 @@ function onDocumentMouseDown( event ) {
 		openModal();
 	}
 } 		
-//https://www.youtube.com/watch?v=ckcuQw2fDT4&
-//https://codepen.io/wpdildine/pen/ZGyRVN/
-//https://threejs.org/docs/#api/en/core/Raycaster
-
-//--------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------
-
-
-
-
-animate();
