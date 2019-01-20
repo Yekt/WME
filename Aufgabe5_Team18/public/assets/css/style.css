@@ -27,31 +27,45 @@ body {
 /*--------------------------------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------------------*/
 
-.popup{
-	max-width: 75%;
+.modal {
+	/*display: none;*/
+  	max-width: 75%;
 	height: auto;
 	background-color: rgba(255, 255, 255, 0.49);
 	border-radius: 5px;
-	position: absolute;
-	top: 5%;
-	left: 12.5%;
+	position: fixed;
+	top: 100px;
+	left: 1200px;
 	padding: 5px 20px 5px 20px;
 	-moz-box-shadow: 3px 3px 5px 6px #ccc;
 	-webkit-box-shadow: 3px 3px 5px 6px #ccc;
 	box-shadow: 1px 3px 1px 1px rgba(0, 0, 0, 0.17);
-	z-index:1109;
-	}
+	z-index:3;
+	animation-name: modalopen;
+	animation-duration: 1s;
+}
 
+.close {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+  color: #fff;
+}
 
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-nav {
-	height: 80px;
-	width: 100vw;
-	background-image: linear-gradient(to bottom, #d1d1d1, #eeeeee);
-	border-bottom: 1px solid #c1c1c1;
-	overflow: hidden;
-	position: fixed;
-	z-index: 2;
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 #logo{
