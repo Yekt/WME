@@ -14,10 +14,10 @@ Code-Grundlage und Ordnerstruktur wurden aus der Vorlage für Aufgabe 3 und unse
 * Die Balken reagieren auf Verschiebung, Zoom und Drehung der Kamera in alle Richtungen. Mit einem Problem: bei der Vertikalen Drehung der Kamera, drehen sich die Balken um ihren eigenen Mittelpunkt, was bei extremen Winkeln seltsam aussehen kann.
  
 ## Quellen und Resourcen
-[TU-Dresden] https://mt.inf.tu-dresden.de/study/teaching/ws_18-19/wme_18-19/ueb-wme_18-19/ ,
-[mappa/threejs Tutorial]https://mappa.js.org/docs/simple-map.html ,
-[StackOverflow]https://stackoverflow.com/questions/9618504/how-to-get-the-selected-radio-button-s-value ,
-[Traversy Media]https://www.youtube.com/watch?v=6ophW7Ask_0 ,
-[Brad Traversy - Codepen]https://codepen.io/bradtraversy/pen/zEOrPp ,
-[Patrick - Codepen]https://codepen.io/wpdildine/pen/ZGyRVN/ ,
-[threejs]https://threejs.org/docs/#api/en/core/Raycaster
+[TU-Dresden](https://mt.inf.tu-dresden.de/study/teaching/ws_18-19/wme_18-19/ueb-wme_18-19/),
+[mappa/threejs Tutorial](https://mappa.js.org/docs/simple-map.html),
+[StackOverflow](https://stackoverflow.com/questions/9618504/how-to-get-the-selected-radio-button-s-value),
+[Traversy Media](https://www.youtube.com/watch?v=6ophW7Ask_0),
+[Brad Traversy - Codepen](https://codepen.io/bradtraversy/pen/zEOrPp),
+[Patrick - Codepen](https://codepen.io/wpdildine/pen/ZGyRVN/),
+[threejs](https://threejs.org/docs/#api/en/core/Raycaster)
