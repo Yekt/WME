@@ -27,6 +27,7 @@ let highest_value = 0;
 var material = new THREE.MeshLambertMaterial({color: 0xffffff});
 
 function updateMeshes() {
+	closeModal();
 	// https://stackoverflow.com/questions/9618504/how-to-get-the-selected-radio-button-s-value
 	var radio = document.getElementsByName('selection');
 	for(var i = 0; i < radio.length; i++) {
@@ -181,6 +182,7 @@ function getPixel(lat, long) {
 // Upate mesh position
 map.onChange(update);
 function update() {
+	closeModal();
 	if (loaded) {
 		meshes.forEach((mesh, item) => {
 			newPos = getPixel(json[item].gps_lat, json[item].gps_long);
@@ -212,7 +214,6 @@ function update() {
 			
 			const turn = - map.map.transform.angle;
 			mesh.rotation.z = turn;
-			
 			
 			scene.add(mesh);
 			//renderer.render(scene, camera);
@@ -280,8 +281,6 @@ function onDocumentMouseDown( event ) {
 	raycaster.setFromCamera( mouse, camera );
 
 	var intersects = raycaster.intersectObjects( meshes );
-        
-	var color = (Math.random() * 0xffffff);
 
 	if ( intersects.length > 0 ) {
 		// get Data for country
@@ -292,8 +291,6 @@ function onDocumentMouseDown( event ) {
 		var lat = data[2];
 		var long = data[3];
 		var newPos = getPixel(lat, long);
-		
-		intersects[ 0 ].object.material.color.setHex( color );
 				
 		modal.style.top = (event.clientY - 80) + "px";
 		modal.style.left = event.clientX + "px";
