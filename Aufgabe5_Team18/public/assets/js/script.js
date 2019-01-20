@@ -238,8 +238,9 @@ function update() {
 	}
 }
 
-//popup and closebutton
+// popup and closebutton
 //https://www.youtube.com/watch?v=6ophW7Ask_0
+//https://codepen.io/bradtraversy/pen/zEOrPp
 function openModal() {
   modal.style.display = 'block';
 }

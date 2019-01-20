@@ -5,11 +5,16 @@ Jean-Luc Rudow,
 Lukas Sauter
 
 ## Anmerkungen
-* href links aus dem header-menu entfernt, da sie nicht benötigt werden für diese Aufgabe.
-* 
+* Code-Grundlage und Ordnerstruktur aus der Vorlage für Aufgabe 3. Für die Bereitstellung der Daten, wurde ein NodeJs Server in Kombination mit Ajax verwendet (app.js, Port ist 3000).
+* Header wurde entfernt, da er für diese Aufgabe nicht benötigt wurde.
+* Ziel war es Balken zu anmimieren, die aussehen, als ob sie auf der Karte stehen würden.
+* Quellen im Code zeigen an, dass der folgende Code-Block oder die folgende Funktion aus der angegebenen Quelle stammt und eventuell deutlich angepasst wurden. Mit "from mappa/threejs tutorial" markierte Stellen zeigen an, dass ein Teile des Codes des Tutorials verwendet wurden (Link unten).
+* Die Balken reagieren auf Verschiebung, Zoom und Drehung der Kamera in alle Richtungen. Mit einem Problem: bei der Vertikalen Drehung der Kamera, drehen sich die Balken um ihren eigenen Mittelpunkt, was bei extremen Winkeln seltsam aussehen kann.
  
 ## Quellen und Resourcen
-(noch aus Aufgabe 3)
-[express]https://www.youtube.com/watch?v=pKd0Rpw7O48&
-[nodejs&ajax]https://www.youtube.com/watch?v=rJesac0_Ftw&t=2008s
-[csvtojson]https://www.npmjs.com/package/csvtojson
+[mappa/threejs Tutorial]https://mappa.js.org/docs/simple-map.html
+[StackOverflow]https://stackoverflow.com/questions/9618504/how-to-get-the-selected-radio-button-s-value
+[Traversy Media]https://www.youtube.com/watch?v=6ophW7Ask_0
+[Brad Traversy - Codepen]https://codepen.io/bradtraversy/pen/zEOrPp
+[Patrick - Codepen]https://codepen.io/wpdildine/pen/ZGyRVN/
+[threejs]https://threejs.org/docs/#api/en/core/Raycaster
