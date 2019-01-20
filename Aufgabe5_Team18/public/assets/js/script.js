@@ -6,9 +6,9 @@ let highest_value = 0;
 
 // meshes
 let meshes = [];
-var material = new THREE.MeshLambertMaterial({color: 0xffffff});
+let material = new THREE.MeshLambertMaterial({color: 0xffffff});
 
-// scene, camera, canvas, renderer, light
+// scene, camera, canvas, renderer, light - from mappa/threejs tutorial
 let WIDTH, HEIGHT, ASPECT;
 const VIEW_ANGLE = 45;
 const NEAR = 0.1;
@@ -56,7 +56,7 @@ function init() {
 		}
 	});
 	
-	// Scene, camera, canvas, renderer, light
+	// Scene, camera, canvas, renderer, light - from mappa/threejs tutorial
 	WIDTH = window.innerWidth - 17;
 	HEIGHT = window.innerHeight - 85;
 	ASPECT = WIDTH / HEIGHT;
@@ -76,7 +76,7 @@ function init() {
 	scene.add(light);
 	scene.add(ambient);
 	
-	//MapboxGL
+	//MapboxGL - from mappa/threejs tutorial
 	options = {
 		lat: 45,
 		lng: 10,
@@ -154,7 +154,7 @@ function updateMeshes() {
 		let ratio = value / highest_value;
 		let bar = new THREE.BoxGeometry(10, 10, 50 * ratio);
 		let mesh = new THREE.Mesh(bar, material);
-		mesh.name = json[i].name + ';' + value + ';' + json[i].gps_lat + ';' + json[i].gps_long;		
+		mesh.name = json[i].name + ';' + value;	
 		meshes.push(mesh);
 	}
 	console.log('Meshes updated for ' + selected + '!');
@@ -194,12 +194,18 @@ function getValue(o) {
 
 // Listeners
 
-// Upate mesh position
+// Upate mesh position - from mappa/threejs tutorial
 function update() {
 	closeModal();
 	if (loaded) {
 		meshes.forEach((mesh, item) => {
-			newPos = getPixel(json[item].gps_lat, json[item].gps_long);
+			const pos = map.latLngToPixel(json[item].gps_lat, json[item].gps_long);
+			const vector = new THREE.Vector3();
+			vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
+			vector.unproject(camera);
+			const dir = vector.sub(camera.position).normalize();
+			const distance = -camera.position.z / dir.z;
+			const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
 			
 			// calculate z-axis delta
 			const value = getValue(json[item]);
@@ -213,7 +219,7 @@ function update() {
 			const pitch = map.map.transform.pitch * -1;
 			const tilt = ((2* Math.PI)/360) * pitch;
 			mesh.rotation.x = tilt;
-			/*const axis = new THREE.Vector3(1, 0, 0).normalize();
+			/*const axis = new THREE.Vector3(1, 0, 0).normalize(); //test vector
 			const quaternion = new THREE.Quaternion();
 			const current = mesh.rotation.x;
 			console.log(current);
@@ -230,18 +236,6 @@ function update() {
 			scene.add(mesh);
 		})
 	}
-}
-function getPixel(lat, long) {
-	lat = parseFloat(lat);
-	long = parseFloat(long);
-	const pos = map.latLngToPixel(lat, long);
-	const vector = new THREE.Vector3();
-	vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
-	vector.unproject(camera);
-	const dir = vector.sub(camera.position).normalize();
-	const distance = -camera.position.z / dir.z;
-	const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
-	return newPos;
 }
 
 //popup and closebutton
@@ -260,8 +254,8 @@ function onDocumentMouseDown( event ) {
 	//https://threejs.org/docs/#api/en/core/Raycaster
 	event.preventDefault();
 
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	mouse.x = ( event.clientX / WIDTH ) * 2 - 1;
+	mouse.y = - ( event.clientY / HEIGHT ) * 2 + 1;
 
 	raycaster.setFromCamera( mouse, camera );
 
@@ -273,9 +267,6 @@ function onDocumentMouseDown( event ) {
 		var name = data[0];
 		var value = Math.round( data[1] * 10) / 10;
 		console.log(name, value);
-		var lat = data[2];
-		var long = data[3];
-		var newPos = getPixel(lat, long);
 				
 		modal.style.top = (event.clientY - 120) + "px";
 		modal.style.left = (event.clientX - 100) + "px";
