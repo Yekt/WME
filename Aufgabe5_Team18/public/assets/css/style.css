@@ -19,6 +19,7 @@
 body {
 	font: normal normal 400 14px/145% "Roboto", Tahoma, Geneva, "Trebuchet MS", Helvetica, sans-serif;
 	padding: 0 0 5em 0;
+	overflow: hidden;
 }
 
 
@@ -31,7 +32,7 @@ body {
 	display: none;
   	max-width: 75%;
 	height: auto;
-	background-color: rgba(255, 255, 255, 0.7);
+	background-color: rgba(255, 255, 255, 0.8);
 	border-radius: 5px;
 	position: fixed;
 	top: 20px;
@@ -41,8 +42,6 @@ body {
 	-webkit-box-shadow: 3px 3px 5px 6px #ccc;
 	box-shadow: 1px 3px 1px 1px rgba(0, 0, 0, 0.17);
 	z-index:3;
-	animation-name: modalopen;
-	animation-duration: 1s;
 }
 
 .close {
@@ -57,15 +56,6 @@ body {
   color: #000;
   text-decoration: none;
   cursor: pointer;
-}
-
-@keyframes modalopen {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 #logo{

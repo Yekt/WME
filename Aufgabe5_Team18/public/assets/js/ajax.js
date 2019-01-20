@@ -103,6 +103,7 @@ function init() {
 
 // Update mesh data
 function updateMeshes() {
+	closeModal();
 	// https://stackoverflow.com/questions/9618504/how-to-get-the-selected-radio-button-s-value
 	var radio = document.getElementsByName('selection');
 	for(var i = 0; i < radio.length; i++) {
@@ -196,6 +197,7 @@ function getValue(o) {
 
 // Upate mesh position
 function update() {
+	closeModal();
 	if (loaded) {
 		meshes.forEach((mesh, item) => {
 			newPos = getPixel(json[item].gps_lat, json[item].gps_long);
@@ -284,11 +286,9 @@ function onDocumentMouseDown( event ) {
 		var lat = data[2];
 		var long = data[3];
 		var newPos = getPixel(lat, long);
-		var xcor = ((newPos.x +1)/2) * window.innerWidth;
-		var ycor = ((newPos.y -1)/-2) * window.innerHeight;
 				
-		modal.style.top = newPos.x + "px";
-		modal.style.left = newPos.y + "px";
+		modal.style.top = (event.clientY - 80) + "px";
+		modal.style.left = event.clientX + "px";
 		
 		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
 		openModal();
