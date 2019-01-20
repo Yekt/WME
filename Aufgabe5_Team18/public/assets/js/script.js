@@ -78,9 +78,9 @@ function init() {
 	
 	//MapboxGL
 	options = {
-		lat: 0,
-		lng: 0,
-		zoom: 4,
+		lat: 45,
+		lng: 10,
+		zoom: 3,
 		pitch: 30
 	}
 	mappa = new Mappa('MapboxGL', key);
@@ -121,22 +121,22 @@ function updateMeshes() {
 	// change color
 	switch(selected) {
 		case 'Birth rate per 1000':
-			material = new THREE.MeshLambertMaterial({color: 0xff0000});
+			material = new THREE.MeshLambertMaterial({color: 0xD03A3D});
 			break;
 		case 'Children per woman':
-			material = new THREE.MeshLambertMaterial({color: 0x00ff00});
+			material = new THREE.MeshLambertMaterial({color: 0x5DAC5A});
 			break;
 		case 'GDP per capita':
-			material = new THREE.MeshLambertMaterial({color: 0x0000ff});
+			material = new THREE.MeshLambertMaterial({color: 0x314CB0});
 			break;
 		case 'Electricity consumption per capita':
-			material = new THREE.MeshLambertMaterial({color: 0xffff00});
+			material = new THREE.MeshLambertMaterial({color: 0xF8E62D});
 			break;
 		case 'Internet user per 100':
-			material = new THREE.MeshLambertMaterial({color: 0xff00ff});
+			material = new THREE.MeshLambertMaterial({color: 0x621B98});
 			break;
 		case 'Phones per 100':
-			material = new THREE.MeshLambertMaterial({color: 0x00ffff});
+			material = new THREE.MeshLambertMaterial({color: 0x58C6DC});
 			break;
 		default:
 			material = new THREE.MeshLambertMaterial({color: 0xffffff});
