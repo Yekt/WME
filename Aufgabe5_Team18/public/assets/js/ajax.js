@@ -282,8 +282,8 @@ function onDocumentMouseDown( event ) {
 		
 		intersects[ 0 ].object.material.color.setHex( color );
 				
-		modal.style.top = ycor + "px";
-		modal.style.left = xcor + "px";
+		modal.style.top = newPos.x + "px";
+		modal.style.left = newPos.y + "px";
 		
 		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
 		openModal();
