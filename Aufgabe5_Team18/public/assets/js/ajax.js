@@ -23,6 +23,7 @@ $.ajax({
 let meshes = [];
 let loaded = false;
 let selected = ''; // changes with radio buttons
+let highest_value = 0;
 var material = new THREE.MeshLambertMaterial({color: 0xffffff});
 
 function updateMeshes() {
@@ -35,10 +36,10 @@ function updateMeshes() {
 		}
 	}
 	
-	let highest = 0;
+	highest_value = 0;
 	for(var i = 0; i < json.length; i++) {
 		let value = getValue(json[i]);
-		if(value >= highest) highest = value;
+		if(value >= highest_value) highest_value = value;
 	}
 	
 	// change color
@@ -77,7 +78,7 @@ function updateMeshes() {
 	// calculate height and add to mesh
 	for(var i = 0; i < json.length; i++) {
 		let value = getValue(json[i]);
-		let ratio = value / highest;
+		let ratio = value / highest_value;
 		let bar = new THREE.BoxGeometry(10, 10, 50 * ratio);
 		let mesh = new THREE.Mesh(bar, material);
 		mesh.rotation.x -= 0.51;
@@ -123,7 +124,7 @@ let viewPortHeight = window.innerHeight;
 console.log('View Port size: ' + viewPortWidth + 'x' + viewPortHeight);
 let WIDTH = 1450;
 let HEIGHT = viewPortHeight;
-let VIEW_ANGLE = 35;
+let VIEW_ANGLE = 45;
 let ASPECT = WIDTH / HEIGHT;
 const NEAR = 0.1;
 const FAR = 10000;
@@ -176,8 +177,14 @@ function update() {
 			const dir = vector.sub(camera.position).normalize();
 			const distance = -camera.position.z / dir.z;
 			const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
+			
+			// calculate z-axis delta
+			const value = getValue(json[item]);
+			const ratio = value / highest_value;
+			const bar_height = ratio * 50;
+			cosnt delta = bar_height/2 - 0.5;
 
-			mesh.position.set(newPos.x, newPos.y, newPos.z);
+			mesh.position.set(newPos.x, newPos.y, delta);
 			scene.add(mesh);
 			//renderer.render(scene, camera);
 		})
@@ -239,7 +246,6 @@ const animate = () => {
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
-
 
 
 animate();
