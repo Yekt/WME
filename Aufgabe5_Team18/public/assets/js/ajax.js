@@ -243,6 +243,7 @@ function openModal() {
 function closeModal() {
   modal.style.display = 'none';
 }
+
 //https://www.youtube.com/watch?v=6ophW7Ask_0
 //https://codepen.io/bradtraversy/pen/zEOrPp
 
@@ -291,14 +292,11 @@ function onDocumentMouseDown( event ) {
 		var lat = data[2];
 		var long = data[3];
 		var newPos = getPixel(lat, long);
-		var xcor = ((newPos.x +1)/2) * window.innerWidth;
-		var ycor = ((newPos.y -1)/-2) * window.innerHeight;
 		
 		intersects[ 0 ].object.material.color.setHex( color );
-		console.log(newPos);
 				
-		modal.style.top = newPos.x + "px";
-		modal.style.left = newPos.y + "px";
+		modal.style.top = (event.clientY - 80) + "px";
+		modal.style.left = event.clientX + "px";
 		
 		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
 		openModal();

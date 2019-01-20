@@ -19,6 +19,7 @@
 body {
 	font: normal normal 400 14px/145% "Roboto", Tahoma, Geneva, "Trebuchet MS", Helvetica, sans-serif;
 	padding: 0 0 5em 0;
+	overflow: hidden;
 }
 
 
