@@ -81,7 +81,7 @@ function updateMeshes() {
 		let ratio = value / highest_value;
 		let bar = new THREE.BoxGeometry(10, 10, 50 * ratio);
 		let mesh = new THREE.Mesh(bar, material);
-		mesh.name = json[i].name + ';' + value;		
+		mesh.name = json[i].name + ';' + value + ';' + json[i].gps_lat + ';' + json[i].gps_long;		
 		meshes.push(mesh);
 	}
 	console.log('Meshes updated for ' + selected + '!');
@@ -165,19 +165,25 @@ map.overlay(canvas);
 //console.log(map.getPitch);
 
 
+function getPixel(lat, long) {
+	lat = parseFloat(lat);
+	long = parseFloat(long);
+	const pos = map.latLngToPixel(lat, long);
+	const vector = new THREE.Vector3();
+	vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
+	vector.unproject(camera);
+	const dir = vector.sub(camera.position).normalize();
+	const distance = -camera.position.z / dir.z;
+	const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
+	return newPos;
+}
 
 // Upate mesh position
 map.onChange(update);
 function update() {
 	if (loaded) {
 		meshes.forEach((mesh, item) => {
-			const pos = map.latLngToPixel(parseFloat(json[item].gps_lat), parseFloat(json[item].gps_long));
-			const vector = new THREE.Vector3();
-			vector.set((pos.x / WIDTH) * 2 - 1, -(pos.y / HEIGHT) * 2 + 1, 0.5);
-			vector.unproject(camera);
-			const dir = vector.sub(camera.position).normalize();
-			const distance = -camera.position.z / dir.z;
-			const newPos = camera.position.clone().add(dir.multiplyScalar(distance));
+			newPos = getPixel(json[item].gps_lat, json[item].gps_long);
 			
 			// calculate z-axis delta
 			const value = getValue(json[item]);
@@ -262,24 +268,27 @@ function onDocumentMouseDown( event ) {
 	var color = (Math.random() * 0xffffff);
 
 	if ( intersects.length > 0 ) {
-	// get Data for country
-	data = intersects[0].object.name.split(';');
-	name = data[0];
-	value = Math.round( data[1] * 10) / 10;
-	console.log(name, value);
-	
-	intersects[ 0 ].object.material.color.setHex( color );
-            
-	this.temp = intersects[ 0 ].object.material.color.getHexString();
-	this.name = intersects[ 0 ].object.name;
-            
-			
-			
-	//modal.style.top = ;
-	//modal.style.left = ;
-	
-	document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
-	openModal();
+		// get Data for country
+		data = intersects[0].object.name.split(';');
+		name = data[0];
+		value = Math.round( data[1] * 10) / 10;
+		console.log(name, value);
+		lat = data[2];
+		long = data[3];
+		newPos = getPixel(lat, long);
+		
+		intersects[ 0 ].object.material.color.setHex( color );
+				
+		this.temp = intersects[ 0 ].object.material.color.getHexString();
+		this.name = intersects[ 0 ].object.name;
+				
+				
+				
+		//modal.style.top = ;
+		//modal.style.left = ;
+		
+		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
+		openModal();
 	}
 } 		
 //https://www.youtube.com/watch?v=ckcuQw2fDT4&
