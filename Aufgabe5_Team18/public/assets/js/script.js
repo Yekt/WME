@@ -95,7 +95,6 @@ function init() {
 	map.onChange(update);
 	closeBtn.addEventListener( 'click', closeModal);
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-	window.addEventListener( 'resize', onWindowResize, false );
 }
 
 
@@ -253,15 +252,6 @@ function openModal() {
 
 function closeModal() {
   modal.style.display = 'none';
-}
-
-// window resize
-function onWindowResize() {
-	
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-	
-	renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
 // popup on mouse click
