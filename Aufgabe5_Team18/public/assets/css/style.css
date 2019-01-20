@@ -74,9 +74,10 @@ body {
 /*--------------------------------------------------------------------------------------------------------------*/
 
 #input {
-	border: 1px solid #c1c1c1;
+	border: 1px rgba(255, 255, 255, 0.4);
 	display: block;
 	text-align: left;
+	transition: 0.7s;
 	
 	margin: 80px 0px 0px 10px;
 	padding: 10px 10px 10px 10px;
@@ -84,8 +85,13 @@ body {
 	
 	width: 185px;
 	height: 250px;
-	background: white;
+	background-color: rgba(255, 255, 255, 0.4);
 	z-index: 2;
+}
+
+#input:hover {
+	border: 1px solid #c1c1c1;
+	background-color: rgba(255, 255, 255, 1);
 }
 
 .container {
