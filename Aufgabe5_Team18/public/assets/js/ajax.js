@@ -82,6 +82,7 @@ function updateMeshes() {
 		let bar = new THREE.BoxGeometry(10, 10, 50 * ratio);
 		let mesh = new THREE.Mesh(bar, material);
 		mesh.rotation.x -= 0.51;
+		mesh.name = json[i].name + ';' + value;
 		meshes.push(mesh);
 	}
 	console.log('Meshes updated for ' + selected + '!');
@@ -162,6 +163,7 @@ var options = {
 var mappa = new Mappa('MapboxGL', key);
 var map = mappa.tileMap(options);
 map.overlay(canvas);
+//console.log(map.getPitch);
 
 
 
@@ -182,7 +184,7 @@ function update() {
 			const value = getValue(json[item]);
 			const ratio = value / highest_value;
 			const bar_height = ratio * 50;
-			cosnt delta = bar_height/2 - 0.5;
+			const delta = (bar_height / 2) - 0.5;
 
 			mesh.position.set(newPos.x, newPos.y, delta);
 			scene.add(mesh);
@@ -227,7 +229,12 @@ const animate = () => {
         var color = (Math.random() * 0xffffff);
 
         if ( intersects.length > 0 ) {
-
+			// get Data for country
+			data = intersects[0].object.name.split(';');
+			name = data[0];
+			value = Math.round( data[1] * 10) / 10;
+			console.log(name, value);
+			
             intersects[ 0 ].object.material.color.setHex( color );
             
             this.temp = intersects[ 0 ].object.material.color.getHexString();
