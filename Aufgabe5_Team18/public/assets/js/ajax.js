@@ -244,6 +244,7 @@ function closeModal() {
   modal.style.display = 'none';
 }
 //https://www.youtube.com/watch?v=6ophW7Ask_0
+//https://codepen.io/bradtraversy/pen/zEOrPp
 
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
@@ -269,23 +270,20 @@ function onDocumentMouseDown( event ) {
 
 	if ( intersects.length > 0 ) {
 		// get Data for country
-		data = intersects[0].object.name.split(';');
-		name = data[0];
-		value = Math.round( data[1] * 10) / 10;
+		var data = intersects[0].object.name.split(';');
+		var name = data[0];
+		var value = Math.round( data[1] * 10) / 10;
 		console.log(name, value);
-		lat = data[2];
-		long = data[3];
-		newPos = getPixel(lat, long);
+		var lat = data[2];
+		var long = data[3];
+		var newPos = getPixel(lat, long);
+		var xcor = ((newPos.x +1)/2) * window.innerWidth;
+		var ycor = ((newPos.y -1)/-2) * window.innerHeight;
 		
 		intersects[ 0 ].object.material.color.setHex( color );
 				
-		this.temp = intersects[ 0 ].object.material.color.getHexString();
-		this.name = intersects[ 0 ].object.name;
-				
-				
-				
-		//modal.style.top = ;
-		//modal.style.left = ;
+		modal.style.top = ycor + "px";
+		modal.style.left = xcor + "px";
 		
 		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
 		openModal();
