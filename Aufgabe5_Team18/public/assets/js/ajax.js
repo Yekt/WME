@@ -120,22 +120,22 @@ function updateMeshes() {
 	}		
 	// change color
 	switch(selected) {
-		case 'birth':
+		case 'Birth rate per 1000':
 			material = new THREE.MeshLambertMaterial({color: 0xff0000});
 			break;
-		case 'children':
+		case 'Children per woman':
 			material = new THREE.MeshLambertMaterial({color: 0x00ff00});
 			break;
-		case 'gdp':
+		case 'GDP per capita':
 			material = new THREE.MeshLambertMaterial({color: 0x0000ff});
 			break;
-		case 'electricity':
+		case 'Electricity consumption per capita':
 			material = new THREE.MeshLambertMaterial({color: 0xffff00});
 			break;
-		case 'internet':
+		case 'Internet user per 100':
 			material = new THREE.MeshLambertMaterial({color: 0xff00ff});
 			break;
-		case 'phones':
+		case 'Phones per 100':
 			material = new THREE.MeshLambertMaterial({color: 0x00ffff});
 			break;
 		default:
@@ -166,22 +166,22 @@ function updateMeshes() {
 function getValue(o) {
 	let value;
 	switch(selected) {
-		case 'birth':
+		case 'Birth rate per 1000':
 			value = o.birth_rate_per_1000;
 			break;
-		case 'children':
+		case 'Children per woman':
 			value = o.children_per_woman;
 			break;
-		case 'gdp':
+		case 'GDP per capita':
 			value = o.gdp_per_capita;
 			break;
-		case 'electricity':
+		case 'Electricity consumption per capita':
 			value = o.electricity_consumption_per_capita;
 			break;
-		case 'internet':
+		case 'Internet user per 100':
 			value = o.internet_user_per_100;
 			break;
-		case 'phones':
+		case 'Phones per 100':
 			value = o.cell_phones_per_100;
 			break;
 		default:
@@ -290,7 +290,7 @@ function onDocumentMouseDown( event ) {
 		modal.style.top = (event.clientY - 120) + "px";
 		modal.style.left = (event.clientX - 100) + "px";
 		
-		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
+		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong><br> is <strong>" + value.toString() + "</strong><br> for <strong>" + name + "</strong></p>";
 		openModal();
 	}
 } 		
