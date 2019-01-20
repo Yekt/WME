@@ -122,8 +122,8 @@ function getValue(o) {
 let viewPortWidth = window.innerWidth;
 let viewPortHeight = window.innerHeight;
 console.log('View Port size: ' + viewPortWidth + 'x' + viewPortHeight);
-let WIDTH = 1450;
-let HEIGHT = viewPortHeight;
+let WIDTH = viewPortWidth - 17;
+let HEIGHT = viewPortHeight - 85;
 let VIEW_ANGLE = 45;
 let ASPECT = WIDTH / HEIGHT;
 const NEAR = 0.1;
@@ -281,6 +281,7 @@ function onDocumentMouseDown( event ) {
 		var ycor = ((newPos.y -1)/-2) * window.innerHeight;
 		
 		intersects[ 0 ].object.material.color.setHex( color );
+		console.log(newPos);
 				
 		modal.style.top = newPos.x + "px";
 		modal.style.left = newPos.y + "px";
