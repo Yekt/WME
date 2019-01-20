@@ -269,13 +269,14 @@ function onDocumentMouseDown( event ) {
 
 	if ( intersects.length > 0 ) {
 		// get Data for country
-		data = intersects[0].object.name.split(';');
-		name = data[0];
-		value = Math.round( data[1] * 10) / 10;
+		var data = intersects[0].object.name.split(';');
+		var name = data[0];
+		var value = Math.round( data[1] * 10) / 10;
 		console.log(name, value);
-		lat = data[2];
-		long = data[3];
-		newPos = getPixel(lat, long);
+		var lat = data[2];
+		var long = data[3];
+		
+		var newPos = map.latLngToPixel(parseFloat(lat), parseFloat(long));
 		
 		intersects[ 0 ].object.material.color.setHex( color );
 				
@@ -284,8 +285,8 @@ function onDocumentMouseDown( event ) {
 				
 				
 				
-		//modal.style.top = ;
-		//modal.style.left = ;
+		modal.style.top = newPos.y;
+		modal.style.left = newPos.x;
 		
 		document.getElementById("text").innerHTML = "<p><strong>" + selected + "</strong> is <strong>" + value.toString() + "</strong> for <strong>" + name + "</strong></p>";
 		openModal();
