@@ -190,4 +190,56 @@ const animate = () => {
   renderer.render(scene, camera);
 };
 
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+
+    var mouse, raycaster;
+	
+        //add raycaster and mouse as 2D vector
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+
+
+		//add event listener for mouse and calls function when activated
+        document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+      
+
+
+    function onDocumentMouseDown( event ) {
+
+        event.preventDefault();
+
+        mouse.x = ( event.clientX / renderer.domElement.width ) * 2 - 1;
+        mouse.y = - ( event.clientY / renderer.domElement.height ) * 2 + 1;
+
+        raycaster.setFromCamera( mouse, camera );
+
+        var intersects = raycaster.intersectObjects( meshes );
+        
+        var color = (Math.random() * 0xffffff);
+
+        if ( intersects.length > 0 ) {
+
+            intersects[ 0 ].object.material.color.setHex( color );
+            
+            this.temp = intersects[ 0 ].object.material.color.getHexString();
+            this.name = intersects[ 0 ].object.name;
+            
+            $( ".text" ).empty();
+            $( ".popup" ).append( "<div class='text'><p>This is the color <strong>#" + this.temp + "</strong> and the name assigned in Blender is <strong>" + this.name  + "</strong></p></div>" );
+            $(".popup").show();
+            
+        }
+        
+    } 		
+//https://www.youtube.com/watch?v=ckcuQw2fDT4&
+//https://codepen.io/wpdildine/pen/ZGyRVN/
+
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+
+
+
 animate();
